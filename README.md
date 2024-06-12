@@ -1,4 +1,4 @@
-![alt text](https://github.com/thotluna/Sudoku/tree/master/docs/images/head.jpeg)
+![Sudoku Game image](/docs/images/head.jpeg)
 # SUDOKU GAME.
 
 
