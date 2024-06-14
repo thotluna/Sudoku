@@ -2012,7 +2012,7 @@
 											"font": "Roboto;12;0",
 											"left": 815,
 											"top": 468,
-											"width": 71.599609375,
+											"width": 71,
 											"height": 24,
 											"stereotypeLabel": {
 												"$ref": "AAAAAAGQCmTvHIrDUQs="
@@ -7660,7 +7660,7 @@
 															"font": "Roboto;12;1",
 															"left": 385,
 															"top": 647,
-															"width": 50.537109375,
+															"width": 50.66015625,
 															"height": 12,
 															"text": "OutGame"
 														},
@@ -7701,7 +7701,7 @@
 													"font": "Roboto;12;0",
 													"left": 380,
 													"top": 640,
-													"width": 60.537109375,
+													"width": 60.66015625,
 													"height": 24,
 													"stereotypeLabel": {
 														"$ref": "AAAAAAGQCoX/rla3rNk="
@@ -7766,7 +7766,7 @@
 													"font": "Roboto;12;0",
 													"left": 380,
 													"top": 664,
-													"width": 60.537109375
+													"width": 60.66015625
 												}
 											],
 											"lineColor": "#797989",
@@ -7775,7 +7775,7 @@
 											"containerChangeable": true,
 											"left": 380,
 											"top": 640,
-											"width": 60.537109375,
+											"width": 60.66015625,
 											"height": 40,
 											"nameCompartment": {
 												"$ref": "AAAAAAGQCoX/rla24wY="
@@ -9356,7 +9356,7 @@
 													"font": "Roboto;12;0",
 													"left": 280,
 													"top": 639,
-													"width": 19.599609375,
+													"width": 19.998046875,
 													"height": 12,
 													"alpha": -1.703348058787423,
 													"distance": 15.132745950421556,
@@ -10472,7 +10472,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGQCizNi5wf26A="
 							},
-							"name": "DomainBusiness",
+							"name": "Domain Business",
 							"ownedViews": [
 								{
 									"_type": "UMLClassView",
@@ -11117,7 +11117,7 @@
 													"top": 359,
 													"width": 95,
 													"height": 12,
-													"text": "Matrix"
+													"text": "Subgrid"
 												},
 												{
 													"_type": "LabelView",
@@ -15164,7 +15164,7 @@
 													"top": 599,
 													"width": 95,
 													"height": 12,
-													"text": "Number"
+													"text": "Digit"
 												},
 												{
 													"_type": "LabelView",
@@ -16553,7 +16553,7 @@
 													"top": 695,
 													"width": 95,
 													"height": 12,
-													"text": "Fixed"
+													"text": "InitialDigit"
 												},
 												{
 													"_type": "LabelView",
@@ -16752,9 +16752,9 @@
 													"font": "Roboto;12;1",
 													"left": 565,
 													"top": 695,
-													"width": 95,
+													"width": 100.869140625,
 													"height": 12,
-													"text": "Variable"
+													"text": "Candidate Number"
 												},
 												{
 													"_type": "LabelView",
@@ -16793,7 +16793,7 @@
 											"font": "Roboto;12;0",
 											"left": 560,
 											"top": 688,
-											"width": 105,
+											"width": 110.869140625,
 											"height": 24,
 											"stereotypeLabel": {
 												"$ref": "AAAAAAGQCkMY8kVdpH8="
@@ -16887,7 +16887,7 @@
 									"containerChangeable": true,
 									"left": 560,
 									"top": 688,
-									"width": 105,
+									"width": 110.869140625,
 									"height": 24,
 									"stereotypeDisplay": "none",
 									"nameCompartment": {
@@ -17033,7 +17033,7 @@
 											"lineColor": "#797989",
 											"fillColor": "#4499ff",
 											"font": "Roboto;12;0",
-											"left": 567,
+											"left": 568,
 											"top": 653,
 											"height": 12,
 											"alpha": 1.5707963267948966,
@@ -17056,7 +17056,7 @@
 											"lineColor": "#797989",
 											"fillColor": "#4499ff",
 											"font": "Roboto;12;0",
-											"left": 554,
+											"left": 556,
 											"top": 661,
 											"height": 12,
 											"alpha": 1.5707963267948966,
@@ -17079,7 +17079,7 @@
 											"lineColor": "#797989",
 											"fillColor": "#4499ff",
 											"font": "Roboto;12;0",
-											"left": 592,
+											"left": 593,
 											"top": 636,
 											"height": 12,
 											"alpha": -1.5707963267948966,
@@ -17100,7 +17100,7 @@
 										"$ref": "AAAAAAGQCkMY8kVbkpc="
 									},
 									"lineStyle": 1,
-									"points": "604:687;557:616",
+									"points": "606:687;557:616",
 									"showVisibility": true,
 									"nameLabel": {
 										"$ref": "AAAAAAGQCkNs+1fhMw4="
@@ -20382,7 +20382,7 @@
 											"lineColor": "#797989",
 											"fillColor": "#4499ff",
 											"font": "Roboto;12;0",
-											"left": 698,
+											"left": 699,
 											"top": 792,
 											"height": 12,
 											"alpha": 1.5707963267948966,
@@ -20405,7 +20405,7 @@
 											"lineColor": "#797989",
 											"fillColor": "#4499ff",
 											"font": "Roboto;12;0",
-											"left": 688,
+											"left": 689,
 											"top": 803,
 											"height": 12,
 											"alpha": 1.5707963267948966,
@@ -20428,7 +20428,7 @@
 											"lineColor": "#797989",
 											"fillColor": "#4499ff",
 											"font": "Roboto;12;0",
-											"left": 719,
+											"left": 720,
 											"top": 769,
 											"height": 12,
 											"alpha": -1.5707963267948966,
@@ -20449,7 +20449,7 @@
 										"$ref": "AAAAAAGQCkbdKzKxv6w="
 									},
 									"lineStyle": 1,
-									"points": "792:863;626:712",
+									"points": "792:863;628:712",
 									"showVisibility": true,
 									"nameLabel": {
 										"$ref": "AAAAAAGQCkod29zVk5M="
@@ -22621,7 +22621,7 @@
 										"$ref": "AAAAAAGQClKhS5phMuM="
 									},
 									"lineStyle": 1,
-									"points": "910:863;636:712",
+									"points": "910:863;637:712",
 									"showVisibility": true,
 									"nameLabel": {
 										"$ref": "AAAAAAGQClTh5Olz4b0="
@@ -22664,7 +22664,7 @@
 													"font": "Roboto;12;0",
 													"left": 789,
 													"top": 565,
-													"width": 78.375,
+													"width": 95.51953125,
 													"height": 12,
 													"text": "«enumeration»"
 												},
@@ -22679,7 +22679,7 @@
 													"font": "Roboto;12;1",
 													"left": 789,
 													"top": 579,
-													"width": 78.375,
+													"width": 95.51953125,
 													"height": 12,
 													"text": "Color"
 												},
@@ -22720,7 +22720,7 @@
 											"font": "Roboto;12;0",
 											"left": 784,
 											"top": 560,
-											"width": 88.375,
+											"width": 105.51953125,
 											"height": 36,
 											"stereotypeLabel": {
 												"$ref": "AAAAAAGQCla+ORMlVfA="
@@ -22831,7 +22831,7 @@
 													"font": "Roboto;12;0",
 													"left": 789,
 													"top": 601,
-													"width": 78.375,
+													"width": 95.51953125,
 													"height": 12,
 													"text": "Fixed",
 													"horizontalAlignment": 0
@@ -22850,9 +22850,9 @@
 													"font": "Roboto;12;0",
 													"left": 789,
 													"top": 615,
-													"width": 78.375,
+													"width": 95.51953125,
 													"height": 12,
-													"text": "Variable",
+													"text": "candidateNumber",
 													"horizontalAlignment": 0
 												},
 												{
@@ -22869,7 +22869,7 @@
 													"font": "Roboto;12;0",
 													"left": 789,
 													"top": 629,
-													"width": 78.375,
+													"width": 95.51953125,
 													"height": 12,
 													"text": "Highlight",
 													"horizontalAlignment": 0
@@ -22888,7 +22888,7 @@
 													"font": "Roboto;12;0",
 													"left": 789,
 													"top": 643,
-													"width": 78.375,
+													"width": 95.51953125,
 													"height": 12,
 													"text": "Help",
 													"horizontalAlignment": 0
@@ -22899,7 +22899,7 @@
 											"font": "Roboto;12;0",
 											"left": 784,
 											"top": 596,
-											"width": 88.375,
+											"width": 105.51953125,
 											"height": 64
 										}
 									],
@@ -22909,7 +22909,7 @@
 									"containerChangeable": true,
 									"left": 784,
 									"top": 560,
-									"width": 88.375,
+									"width": 105.51953125,
 									"height": 100,
 									"nameCompartment": {
 										"$ref": "AAAAAAGQCla+ORMkPMY="
@@ -23737,7 +23737,7 @@
 											"lineColor": "#797989",
 											"fillColor": "#4499ff",
 											"font": "Roboto;12;0",
-											"left": 827,
+											"left": 828,
 											"top": 794,
 											"height": 12,
 											"alpha": 1.5707963267948966,
@@ -23760,7 +23760,7 @@
 											"lineColor": "#797989",
 											"fillColor": "#4499ff",
 											"font": "Roboto;12;0",
-											"left": 821,
+											"left": 822,
 											"top": 808,
 											"height": 12,
 											"alpha": 1.5707963267948966,
@@ -23783,7 +23783,7 @@
 											"lineColor": "#797989",
 											"fillColor": "#4499ff",
 											"font": "Roboto;12;0",
-											"left": 838,
+											"left": 839,
 											"top": 767,
 											"height": 12,
 											"alpha": -1.5707963267948966,
@@ -23804,7 +23804,7 @@
 										"$ref": "AAAAAAGQCl3HYU4XXZI="
 									},
 									"lineStyle": 1,
-									"points": "1022:863;645:712",
+									"points": "1022:863;646:712",
 									"showVisibility": true,
 									"nameLabel": {
 										"$ref": "AAAAAAGQCl4nEnxiR8c="
@@ -24045,7 +24045,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGQCizNi5wf26A="
 							},
-							"name": "Matrix",
+							"name": "Subgrid",
 							"ownedElements": [
 								{
 									"_type": "UMLAssociation",
@@ -24348,7 +24348,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGQCizNi5wf26A="
 							},
-							"name": "Number",
+							"name": "Digit",
 							"ownedElements": [
 								{
 									"_type": "UMLAssociation",
@@ -24387,7 +24387,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGQCizNi5wf26A="
 							},
-							"name": "Fixed",
+							"name": "InitialDigit",
 							"ownedElements": [
 								{
 									"_type": "UMLGeneralization",
@@ -24410,7 +24410,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGQCizNi5wf26A="
 							},
-							"name": "Variable",
+							"name": "Candidate Number",
 							"ownedElements": [
 								{
 									"_type": "UMLGeneralization",
@@ -24919,7 +24919,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGQCla+ORMhYls="
 									},
-									"name": "Variable"
+									"name": "candidateNumber"
 								},
 								{
 									"_type": "UMLEnumerationLiteral",
