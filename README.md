@@ -71,4 +71,21 @@ for a well-posed puzzle has a single solution.
 
 ![Context Domain diagram](/docs/images/context_domain.png)
 
+## Use Cases Prioritize
+
+
+| Use Case   | Tech |
+|------------|------|
+| Generate   | 5    |
+| Load       | 3    |
+| Save       | 3    |
+| Put        | 0    |
+| Highlight  | 1    |
+| Help       | 1    |
+| Undo       | 1    |
+| Redo       | 1    |
+| Restart    | 0    |
+| Resume     | 0    |
+| Exit       | 0    |
+
 
