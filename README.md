@@ -67,4 +67,8 @@ for a well-posed puzzle has a single solution.
   mark or applying an action.
 - **Help**	Provides assistance to the player, such as suggesting possible moves or highlighting potential errors.
 
+## System Context Diagram
+
+![Context Domain diagram](/docs/images/context_domain.png)
+
 
