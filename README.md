@@ -9,23 +9,13 @@ and each of the nine 3 × 3 subgrids that compose the grid (also called "boxes",
 contains all of the digits from 1 to 9. The puzzle setter provides a partially completed grid, which 
 for a well-posed puzzle has a single solution.
 
+## Requirement
+
+![Sudoku Game Requirement](/docs/images/required.png)
+
 ## Domain Model
 
 ![Sudoku Game image](/docs/images/domain_model.png)
-
-## User Interface
-
-![Welcome view image](/docs/images/welcome_view.png)
-![initial menu view image](/docs/images/initital_menu.png)
-![load menu view image](/docs/images/load_menu.png)
-![Board view image](/docs/images/board.png)
-![Game menu view image](/docs/images/game_menu.png)
-![Put view image](/docs/images/put_view.png)
-![Highlight view image](/docs/images/highlight_view.png)
-![Help view image](/docs/images/help_view.png)
-![Coordinate error view image](/docs/images/coordinate_error.png)
-![Number error view image](/docs/images/number_error.png)
-![Save menu view image](/docs/images/exit_menu.png)
 
 ## Glossary
 
@@ -67,6 +57,11 @@ for a well-posed puzzle has a single solution.
   mark or applying an action.
 - **Help**	Provides assistance to the player, such as suggesting possible moves or highlighting potential errors.
 
+## Use Cases
+
+![Use case diagram](/docs/images/use_cases.png)
+
+
 ## System Context Diagram
 
 ![Context Domain diagram](/docs/images/context_domain.png)
@@ -74,20 +69,40 @@ for a well-posed puzzle has a single solution.
 ## Use Cases Prioritize
 
 
-| Use Case  | Tech | Interaction  |
-|-----------|------|--------------|
-| Start     | 5    | 1            |
-| Load      | 3    | 1            |
-| Save      | 3    | pending      |
-| Put       | 0    | 1            |
-| Highlight | 1    | pending      |
-| Help      | 1    | pending      |
-| Undo      | 1    | pending      |
-| Redo      | 1    | pending      |
-| Restart   | 0    | pending      |
-| Resume    | 0    | pending      |
-| Exit      | 0    | pending      |
+| Use Case   | Tech | Interaction |
+|------------|------|-------------|
+| Start      | 5    | 1           |
+| Load       | 3    | 3           |
+| ShowBoard  | 3    | 1           |
+| Save       | 3    | 2           |
+| Put        | 0    | 2           |
+| Highlight  | 1    | 4           |
+| Help       | 1    | 4           |
+| Undo       | 1    | 3           |
+| Redo       | 1    | 3           |
+| Restart    | 0    | 4           |
+| Resume     | 0    | 2           |
+| Exit       | 0    | 1           |
 
+![Use case prioritization](/docs/images/prioritization.png)
+
+## User Interface
+
+![Welcome view image](/docs/images/welcome_view.png)
+![Start menu view image](/docs/images/initital_menu.png)
+![load menu view image](/docs/images/load_menu.png)
+![Board view image](/docs/images/board.png)
+![Game menu view image](/docs/images/game_menu.png)
+![Put view image](/docs/images/put_view.png)
+![Error value view image](/docs/images/error_value_view.png)
+![Highlight view image](/docs/images/highlight_view.png)
+![Help view image](/docs/images/help_view.png)
+![Error coordinate view image](/docs/images/error_coordinate_view.png)
+![Error view](/docs/images/Error_view.png)
+![Save menu view image](/docs/images/exit_menu.png)
+
+## UI - Use Cases
+![UI Use Case relation](/docs/images/ui_use_case.png)
 
 
 
