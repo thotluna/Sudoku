@@ -2,6 +2,8 @@ package utils.menu;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import utils.controllers.InRageValidator;
+import utils.controllers.Validator;
 
 import static org.junit.jupiter.api.Assertions.*;
 
