@@ -21,7 +21,6 @@ public class State {
         this.state = StateValue.values()[this.state.ordinal() + 1];
     }
 
-
     public void endState() {
         state = StateValue.OUT_GAME;
     }
