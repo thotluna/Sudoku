@@ -2,6 +2,9 @@ package utils.menu;
 
 import utils.Colors;
 import utils.Console;
+import utils.controllers.InRageValidator;
+import utils.controllers.IsNumberValidator;
+import utils.controllers.Validator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +20,8 @@ public class Menu {
 
 
     public Menu(String title){
+        assert title != null && !title.isBlank() && !title.isEmpty();
+
         this.title = title;
         this.commandList = new ArrayList<>();
         this.errorNonNumber = ERROR_NON_NUMBER;
@@ -25,6 +30,10 @@ public class Menu {
 
     public Menu(String title, String errorNonNumber, String errorOutRange) {
         this(title);
+
+        assert errorNonNumber != null && !title.isBlank() && !title.isEmpty();
+        assert errorOutRange != null && !title.isBlank();
+
         this.errorNonNumber = errorNonNumber;
         this.errorOutRage = errorOutRange;
     }

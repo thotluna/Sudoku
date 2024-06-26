@@ -1,6 +1,6 @@
-package utils.menu;
+package utils.controllers;
 
-public class InRageValidator extends Validator{
+public class InRageValidator extends Validator {
 
     private final int maxRange;
     private static final int MIN_RAGE = 1;

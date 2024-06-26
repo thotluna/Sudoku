@@ -1,4 +1,4 @@
-package utils.menu;
+package utils.controllers;
 
 public abstract class Validator {
 
