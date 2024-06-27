@@ -9,7 +9,7 @@ public class Cell {
 
     private TypeCell type;
 
-    private static final Interval INTERVAL_VALUE = new Interval(1, 9);
+    private static final Interval INTERVAL_VALUE = new Interval(0, 9);
 
     public Cell(Coordinate coordinate, int value, TypeCell type) {
         assert INTERVAL_VALUE.isWithinRange(value);
@@ -48,5 +48,7 @@ public class Cell {
     }
 
 
-
+    public TypeCell getType() {
+        return type;
+    }
 }

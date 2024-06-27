@@ -16,6 +16,10 @@ public class StartController implements Controller {
         view.visit(this);
     }
 
+    public void inGameState() {
+        session.inGameState();
+    }
+
     public void endState() {
         session.endState();
     }
@@ -37,7 +41,4 @@ public class StartController implements Controller {
         session.nextState();
     }
 
-    public void inGameState() {
-        session.inGameState();
-    }
 }

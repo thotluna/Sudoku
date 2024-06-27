@@ -48,14 +48,4 @@ public class Resolver {
     public int[][] getSolution() {
         return solution;
     }
-
-    public void print() {
-        System.out.println("resolve");
-        for (int row = 0; row < GRID_SIZE; row++) {
-            for (int column = 0; column < GRID_SIZE; column++) {
-                System.out.print(this.solution[row][column]);
-            }
-            System.out.println("");
-        }
-    }
 }

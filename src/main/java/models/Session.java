@@ -25,17 +25,16 @@ public class Session {
         this.state.nextState();
     }
 
-    public void addCells(List<Cell> cells){
-        game.addCells(cells);
-    }
-
     public void endState() {
         state.endState();
     }
 
-    public int[][] getBoard(){
-        return this.game.getBoard();
+    public void inGameState() {
+        state.inGameState();
+    }
 
+    public Cell[][] getBoard(){
+        return this.game.getBoard();
     }
 
     public void setCells(List<Cell> initial) {
@@ -46,7 +45,4 @@ public class Session {
         game.setSolution(solution);
     }
 
-    public void inGameState() {
-        state.inGameState();
-    }
 }

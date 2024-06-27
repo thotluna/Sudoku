@@ -1,21 +1,18 @@
 package views.console;
 
+import models.Cell;
 import utils.Colors;
 import utils.Console;
 
 public class BoardView {
-
     Console console;
 
     public BoardView() {
         console = Console.getInstance();
     }
 
-    public void interact(int[][] board) {
-
-
+    public void interact(Cell[][] board) {
         String head = Colors.BLUE.get() + "-".repeat(41) + Colors.DEFAULT.get();
-
 
         console.writeln(head);
         for (int row = 0; row < 9; row++) {
@@ -27,10 +24,10 @@ public class BoardView {
         }
     }
 
-    private String formatLine(int[] line){
+    private String formatLine(Cell[] column){
         StringBuilder lineFormat = new StringBuilder(  Colors.BLUE.get() + "||" + Colors.DEFAULT.get());
-        for (int i = 0; i < line.length; i++) {
-            lineFormat.append(formatCell(line[i]));
+        for (int i = 0; i < column.length; i++) {
+            lineFormat.append(formatCell(column[i]));
             if((i + 1) % 3 == 0) {
                 lineFormat.append(formatBase("||"));
             }else{
@@ -41,14 +38,38 @@ public class BoardView {
         return lineFormat.toString();
     }
 
-    private String formatCell(int value){
+    private String formatCell(Cell cell){
         StringBuilder cellValue = new StringBuilder();
-        if(value > 0){
-            cellValue.append(Colors.BLUE.get()).append(" ").append(value).append(" ").append(Colors.DEFAULT.get());
+
+        switch (cell.getType()){
+            case FIXED -> cellValue.append(Colors.BLUE.get())
+                    .append(" ")
+                    .append(cell.getValue())
+                    .append(" ")
+                    .append(Colors.DEFAULT.get());
+            case CANDIDATE -> cellValue.append(Colors.DEFAULT.get())
+                    .append(" ")
+                    .append(cell.getValue())
+                    .append(" ")
+                    .append(Colors.DEFAULT.get());
+            case HIGHLIGHT -> cellValue.append(Colors.BLUE_BACKGROUND.get())
+                    .append(" ")
+                    .append(cell.getValue())
+                    .append(" ")
+                    .append(Colors.DEFAULT.get());
+            case HELP -> cellValue.append(Colors.YELLOW.get())
+                    .append(" ")
+                    .append(cell.getValue())
+                    .append(" ")
+                    .append(Colors.DEFAULT.get());
+            case ERROR -> cellValue.append(Colors.RED.get())
+                    .append(" ")
+                    .append(cell.getValue())
+                    .append(" ")
+                    .append(Colors.DEFAULT.get());
+
         }
-        else {
-            cellValue.append(" ").append(value).append(" ");
-        }
+
         return cellValue.toString();
     }
 

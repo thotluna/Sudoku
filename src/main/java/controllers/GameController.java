@@ -1,5 +1,6 @@
 package controllers;
 
+import models.Cell;
 import models.Session;
 
 public class GameController implements Controller {
@@ -14,7 +15,11 @@ public class GameController implements Controller {
         view.visit(this);
     }
 
-    public int[][] getBoard() {
+    public void nextState() {
+        session.nextState();
+    }
+
+    public Cell[][] getBoard() {
         return session.getBoard();
     }
 
@@ -22,7 +27,5 @@ public class GameController implements Controller {
         return false;
     }
 
-    public void nextState() {
-        session.nextState();
-    }
+
 }
