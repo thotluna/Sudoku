@@ -12,5 +12,7 @@ public class StartMenu extends Menu {
 
         addCommand(new NewGameCommand(MessageRepository.getInstance().get("sudoku.start-menu.new"), controller));
         addCommand(new LoadGameCommand(MessageRepository.getInstance().get("sudoku.start-menu.load"), controller));
+        addCommand(new CancelStartGameCommand(MessageRepository.getInstance().get("sudoku.start-menu.cancel"),
+                controller));
     }
 }
