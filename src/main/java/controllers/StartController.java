@@ -23,4 +23,8 @@ public class StartController implements Controller {
     public void createNewGame() {
         GenerateNewGame generator = new GenerateNewGame();
     }
+
+    public void loadGame() {
+        session.nextState();
+    }
 }

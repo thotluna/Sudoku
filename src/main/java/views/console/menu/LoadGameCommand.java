@@ -9,7 +9,7 @@ public class LoadGameCommand extends StartCommandBase{
 
     @Override
     public void execute() {
-
+        controller.loadGame();
     }
 
     @Override
