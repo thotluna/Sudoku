@@ -24,4 +24,8 @@ public class State {
     public void endState() {
         state = StateValue.OUT_GAME;
     }
+
+    public void inGameState() {
+        state = StateValue.IN_GAME;
+    }
 }

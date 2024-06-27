@@ -9,6 +9,7 @@ import types.TypeCell;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 public class GenerateNewGame {
@@ -22,18 +23,14 @@ public class GenerateNewGame {
     }
 
     public List<Cell> generateListCellValidValid(List<Cell> cells){
-        List<Cell> nCells = this.operate(cells);
+        List<Cell> nCells = this.operate(cells).stream().filter(Objects::nonNull).toList();
         Resolver resolver = new Resolver();
         boolean isSuccess = resolver.solveBoard(this.convertCellsToArray(nCells));
-        if(isSuccess){
-            System.out.println("Success");
+        if(!nCells.isEmpty() && isSuccess){
             solution = resolver.getSolution();
             initial = nCells;
-            return nCells;
-        }else{
-            System.out.println("fail");
-            return  generateListCellValidValid(new ArrayList<>());
         }
+        return nCells;
     }
 
     private List<Cell> operate(List<Cell> cells) {
@@ -45,6 +42,8 @@ public class GenerateNewGame {
                 Cell cell = getNewCellValid(coordinate, cells);
                 if(cell != null){
                     cells.add(getNewCellValid(coordinate, cells));
+                }else {
+                    return new ArrayList<>();
                 }
             }
 
@@ -62,7 +61,6 @@ public class GenerateNewGame {
             cell = new Cell(coordinate, value, TypeCell.CANDIDATE);
             attempts++;
             if(attempts > 10){
-                System.out.println("Do not created!");
                 return null;
             }
         }while (validator.validate(cell, cells) != null);
@@ -85,7 +83,6 @@ public class GenerateNewGame {
                 aCells[cell.getRow()][cell.getColumn()] = cell.getValue();
             }
         }
-
         return aCells;
     }
 

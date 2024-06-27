@@ -1,6 +1,8 @@
 package views.console.menu;
 
 import controllers.StartController;
+import utils.Console;
+import views.console.MessageRepository;
 
 public class NewGameCommand extends StartCommandBase {
 
@@ -10,7 +12,14 @@ public class NewGameCommand extends StartCommandBase {
 
     @Override
     public void execute() {
-        controller.createNewGame();
+        boolean success;
+        do{
+            success = controller.createNewGame();
+            if(!success){
+                Console.getInstance().writeln(MessageRepository.getInstance().get("sudoku.start-menu.new.generate"));
+            }
+        }while (!success);
+        controller.inGameState();
     }
 
     @Override

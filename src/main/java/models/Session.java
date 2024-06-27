@@ -29,12 +29,24 @@ public class Session {
         game.addCells(cells);
     }
 
+    public void endState() {
+        state.endState();
+    }
+
     public List<String> getBoard(){
         return this.game.getBoard();
 
     }
 
-    public void endState() {
-        state.endState();
+    public void setCells(List<Cell> initial) {
+        game.addCells(initial);
+    }
+
+    public void setSolution(int[][] solution) {
+        game.setSolution(solution);
+    }
+
+    public void inGameState() {
+        state.inGameState();
     }
 }

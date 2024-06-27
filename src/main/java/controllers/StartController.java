@@ -20,11 +20,23 @@ public class StartController implements Controller {
         session.endState();
     }
 
-    public void createNewGame() {
+    public boolean createNewGame() {
         GenerateNewGame generator = new GenerateNewGame();
+        boolean success = !generator.generate().isEmpty();
+        if (success){
+            session.setCells(generator.getInitial());
+            session.setSolution(generator.getSolution());
+            session.inGameState();
+
+        }
+        return success;
     }
 
     public void loadGame() {
         session.nextState();
+    }
+
+    public void inGameState() {
+        session.inGameState();
     }
 }

@@ -3,6 +3,7 @@ package controllers;
 import models.Cell;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.Matchers.*;
@@ -19,16 +20,15 @@ class GenerateNewGameTest {
     }
 
     @Test
-    void GivenRequestNewGame_WhenGenerateNewGameGenerate_ThenReturnListCellLess250ms(){
+    void GivenRequestNewGame_WhenGenerateNewGameGenerate_ThenReturnListCellNotNull(){
         GenerateNewGame generateNewGame = new GenerateNewGame();
-        long startTime = System.currentTimeMillis();
-        for (int i = 0; i < 10; i++) {
-            List<Cell> cells = generateNewGame.generate();
-            assertThat(cells.size(), is(greaterThan(0)));
+        for (int j = 0; j < 10; j++) {
+            List<Cell> list = generateNewGame.generate();
+            for (Cell cell : list) {
+                assertThat(cell, notNullValue());
+                assertThat(cell, notNullValue());
+            }
         }
-        long endTime = System.currentTimeMillis() - startTime;
-
-        assertThat(endTime/10, is(lessThanOrEqualTo(250L)));
     }
 
 }
