@@ -22,6 +22,7 @@ public class StartController implements Controller {
 
     public boolean createNewGame() {
         GenerateNewGame generator = new GenerateNewGame();
+
         boolean success = !generator.generate().isEmpty();
         if (success){
             session.setCells(generator.getInitial());

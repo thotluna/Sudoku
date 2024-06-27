@@ -1,12 +1,11 @@
 package models;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class Game {
 
-    public List<Cell> initial;
+    private List<Cell> initial;
     private int[][] solution;
     private final int[][] board;
 
@@ -26,6 +25,7 @@ public class Game {
             assert cell != null;
             board[cell.getRow()][cell.getColumn()] = cell.getValue();
         }
+
     }
 
     public void addCells(List<Cell> cells) {
@@ -35,11 +35,12 @@ public class Game {
         setBoard(cells);
     }
 
-    public List<String> getBoard() {
-        return new ArrayList<>();
+    public int[][] getBoard() {
+        return board;
     }
 
     public void setSolution(int[][] solution) {
         this.solution = solution;
     }
+
 }

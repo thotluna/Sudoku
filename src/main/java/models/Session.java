@@ -33,7 +33,7 @@ public class Session {
         state.endState();
     }
 
-    public List<String> getBoard(){
+    public int[][] getBoard(){
         return this.game.getBoard();
 
     }

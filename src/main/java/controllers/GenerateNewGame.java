@@ -22,14 +22,15 @@ public class GenerateNewGame {
         return this.generateListCellValidValid(cells);
     }
 
-    public List<Cell> generateListCellValidValid(List<Cell> cells){
+    private List<Cell> generateListCellValidValid(List<Cell> cells){
         List<Cell> nCells = this.operate(cells).stream().filter(Objects::nonNull).toList();
-        Resolver resolver = new Resolver();
-        boolean isSuccess = resolver.solveBoard(this.convertCellsToArray(nCells));
-        if(!nCells.isEmpty() && isSuccess){
-            solution = resolver.getSolution();
-            initial = nCells;
+        if(nCells.isEmpty()) {
+            return nCells;
         }
+        Resolver resolver = new Resolver();
+        resolver.solveBoard(this.convertCellsToArray(nCells));
+        solution = resolver.getSolution();
+        initial = nCells;
         return nCells;
     }
 
