@@ -54,4 +54,8 @@ public class Session {
     public Cell[][] getBoard(){
         return this.game.getBoard();
     }
+
+    public boolean isGameComplete() {
+        return game.isComplete();
+    }
 }

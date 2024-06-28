@@ -23,8 +23,12 @@ public class GameController implements Controller {
         return session.getBoard();
     }
 
-    public boolean isFinish() {
-        return false;
+    public boolean isGameOver(){
+        return session.isGameComplete();
+    }
+
+    public boolean isNotGameOver(){
+        return !isGameOver();
     }
 
 

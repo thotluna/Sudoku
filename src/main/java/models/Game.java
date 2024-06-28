@@ -66,4 +66,15 @@ public class Game {
     public boolean hasGame() {
         return initial != null && !initial.isEmpty();
     }
+
+    public boolean isComplete() {
+        for (Cell[] cells : board) {
+            for (Cell cell : cells) {
+                if (cell.getValue() == 0) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 }
