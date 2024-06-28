@@ -2,14 +2,9 @@ package views.console;
 
 import models.Cell;
 import utils.Colors;
-import utils.Console;
+import utils.WithConsole;
 
-public class BoardView {
-    Console console;
-
-    public BoardView() {
-        console = Console.getInstance();
-    }
+public class BoardView extends WithConsole {
 
     public void interact(Cell[][] board) {
         String head = Colors.BLUE.get() + "-".repeat(41) + Colors.DEFAULT.get();

@@ -1,11 +1,11 @@
 package views.console;
 
-import utils.Console;
+import utils.WithConsole;
 
-public class WelcomeView {
+public class WelcomeView extends WithConsole {
 
     void interact(){
-        Console console = Console.getInstance();
+
         String lateral = "-".repeat(5);
         String title = String.format("%s %S %s", lateral, "welcome to Sudoku Game", lateral);
         String top = "_".repeat(title.length());

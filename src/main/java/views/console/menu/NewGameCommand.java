@@ -6,8 +6,11 @@ import views.console.MessageRepository;
 
 public class NewGameCommand extends StartCommandBase {
 
+    private Console console;
+
     protected NewGameCommand(String title, StartController controller) {
         super(title, controller);
+        console = new Console();
     }
 
     @Override
@@ -16,7 +19,7 @@ public class NewGameCommand extends StartCommandBase {
         do{
             success = controller.createNewGame();
             if(!success){
-                Console.getInstance().writeln(MessageRepository.getInstance().get("sudoku.start-menu.new.generate"));
+                console.writeln(MessageRepository.getInstance().get("sudoku.start-menu.new.generate"));
             }
         }while (!success);
         controller.inGameState();
@@ -25,5 +28,9 @@ public class NewGameCommand extends StartCommandBase {
     @Override
     public boolean isActive() {
         return true;
+    }
+
+    void setConsole(Console console){
+        this.console = console;
     }
 }

@@ -1,7 +1,7 @@
 package utils.menu;
 
 import utils.Colors;
-import utils.Console;
+import utils.WithConsole;
 import utils.controllers.InRageValidator;
 import utils.controllers.IsNumberValidator;
 import utils.controllers.Validator;
@@ -9,9 +9,10 @@ import utils.controllers.Validator;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Menu {
+public class Menu extends WithConsole {
     private final List<CommandBase> commandList;
     private final String title;
+
     String errorNonNumber;
     String errorOutRage;
 
@@ -21,7 +22,6 @@ public class Menu {
 
     public Menu(String title){
         assert title != null && !title.isBlank() && !title.isEmpty();
-
         this.title = title;
         this.commandList = new ArrayList<>();
         this.errorNonNumber = ERROR_NON_NUMBER;
@@ -47,8 +47,8 @@ public class Menu {
         assert !commands.isEmpty();
 
         printCommands(commands);
-        Console.getInstance().writeln("");
-        Console.getInstance().writeln(title);
+        console.writeln("");
+        console.writeln(title);
 
         int optionSelected = getOptionSelected();
 
@@ -57,16 +57,16 @@ public class Menu {
 
     public int getOptionSelected(){
         String error;
+        String errorValidator = String.format("%s %d",this.errorOutRage,
+                commandList.stream().filter(CommandBase::isActive).toList().size());
+        Validator validator = getValidator(this.errorNonNumber, errorValidator);
         String possibleCommand;
         do{
-            possibleCommand = Console.getInstance().readString("-> ");
-
-            String errorValidator = String.format("%s %d",this.errorOutRage, commandList.size());
-            Validator validator = getValidator(this.errorNonNumber, errorValidator);
+            possibleCommand = console.readString("-> ");
             error = validator.validate(possibleCommand);
             if(error != null){
-                Console.getInstance().writeError(error);
-                Console.getInstance().writeln("");
+                console.writeError(error);
+                console.writeln("");
             }
         }while (error != null);
         return Integer.parseInt(possibleCommand);
@@ -76,7 +76,7 @@ public class Menu {
         for (int i = 0; i < commands.size(); i++) {
             String titleCommand = String.format("%s%d.- %s%S.%s", Colors.CYAN.get(), i+1, Colors.BLUE.get(),
                     commands.get(i).getTitle(), Colors.DEFAULT.get());
-            Console.getInstance().writeln(titleCommand);
+            console.writeln(titleCommand);
         }
     }
 
@@ -85,6 +85,6 @@ public class Menu {
     }
 
     private Validator getValidator(String errorNonNumber, String errorRage){
-        return new IsNumberValidator(errorNonNumber, new InRageValidator( commandList.size(),errorRage));
+        return new IsNumberValidator(errorNonNumber, new InRageValidator( commandList.stream().filter(CommandBase::isActive).toList().size(),errorRage));
     }
 }

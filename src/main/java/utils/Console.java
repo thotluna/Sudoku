@@ -3,19 +3,7 @@ package utils;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-
 public class Console {
-
-    private static Console instance;
-
-    private Console(){}
-
-    public static Console getInstance(){
-        if(instance == null){
-            instance = new Console();
-        }
-        return instance;
-    }
 
     private final BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
@@ -50,6 +38,7 @@ public class Console {
         return input;
     }
 
+    @SuppressWarnings("unused")
     public char readChar(String title) {
         char charValue = ' ';
         boolean ok = false;
