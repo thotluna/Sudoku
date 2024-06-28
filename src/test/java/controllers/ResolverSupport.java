@@ -1,5 +1,13 @@
 package controllers;
 
+import models.Cell;
+import models.Coordinate;
+import types.TypeCell;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
 public class ResolverSupport {
 
     public int[][][] getSolvableGame() {
@@ -53,6 +61,19 @@ public class ResolverSupport {
                 {0, 0, 0, 4, 0, 5, 9, 7, 0},
                 {1, 3, 0, 2, 0, 0, 4, 6, 0}
         };
+    }
+
+    public List<Cell> getSolvableGameForCells(){
+        int[][] solvable = getSolvableGame()[0];
+        List<Cell> board = new ArrayList<>();
+        for (int row = 0; row < 9; row++) {
+            for (int column = 0; column < 9; column++) {
+               if(solvable[row][column] != 0){
+                   board.add(new Cell(new Coordinate(row, column), solvable[row][column], TypeCell.FIXED));
+               }
+            }
+        }
+        return board.stream().filter(Objects::nonNull).toList();
     }
 
 

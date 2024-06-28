@@ -23,10 +23,17 @@ class StateTest {
     }
 
     @Test
+    void GivenTheStateValueAny_WhenStartCalled_ThenStateInitial() {
+        state.nextState();
+        state.start();
+        assertThat(state.getStateValue(), is(StateValue.INITIAL));
+    }
+
+    @Test
     void GivenTheStateValueAny_WhenRestart_ThenStateInitial() {
         state.nextState();
         state.restart();
-        assertThat(state.getStateValue(), is(StateValue.INITIAL));
+        assertThat(state.getStateValue(), is(StateValue.IN_GAME));
     }
 
     @Test
@@ -53,4 +60,16 @@ class StateTest {
         state.endState();
         assertThat(state.getStateValue(), is(StateValue.OUT_GAME));
     }
+
+    @Test
+    void GivenAnyState_WhenInGameStateCalled_thenEndState() {
+        state.inGameState();
+        assertThat(state.getStateValue(), is(StateValue.IN_GAME));
+
+        state.restart();
+        state.endState();
+        state.inGameState();
+        assertThat(state.getStateValue(), is(StateValue.IN_GAME));
+    }
+
 }
