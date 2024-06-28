@@ -12,13 +12,15 @@ public class Session {
         this.game = game;
     }
 
-    public void restart(){
-        this.state.restart();
-        this.game.restart();
+    public void start() {
+        this.game.start();
+        this.state.start();
     }
 
-    public StateValue getStateValue() {
-        return state.getStateValue();
+    public void restart(){
+        assert game.hasGame();
+        this.game.restart();
+        this.state.restart();
     }
 
     public void nextState(){
@@ -33,8 +35,8 @@ public class Session {
         state.inGameState();
     }
 
-    public Cell[][] getBoard(){
-        return this.game.getBoard();
+    public StateValue getStateValue() {
+        return state.getStateValue();
     }
 
     public void setCells(List<Cell> initial) {
@@ -45,4 +47,11 @@ public class Session {
         game.setSolution(solution);
     }
 
+    public boolean hasGame() {
+        return game.hasGame();
+    }
+
+    public Cell[][] getBoard(){
+        return this.game.getBoard();
+    }
 }

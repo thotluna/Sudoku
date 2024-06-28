@@ -4,10 +4,10 @@ import types.TypeCell;
 import utils.models.Interval;
 
 public class Cell {
-    private Coordinate coordinate;
-    private int value;
+    private final Coordinate coordinate;
+    private final int value;
 
-    private TypeCell type;
+    private final TypeCell type;
 
     private static final Interval INTERVAL_VALUE = new Interval(0, 9);
 
@@ -18,6 +18,7 @@ public class Cell {
         this.type = type;
     }
 
+    @SuppressWarnings("unused")
     public boolean hasThisCoordinate(Coordinate coordinate){
         return this.coordinate.equals(coordinate);
     }
@@ -50,5 +51,9 @@ public class Cell {
 
     public TypeCell getType() {
         return type;
+    }
+
+    public boolean isEmpty() {
+        return value == 0;
     }
 }

@@ -5,11 +5,15 @@ public class State {
     private StateValue state;
 
     public State() {
-        this.restart();
+        this.start();
+    }
+
+    public void start(){
+        this.state = StateValue.INITIAL;
     }
 
     public void restart() {
-        this.state = StateValue.INITIAL;
+        this.state = StateValue.IN_GAME;
     }
 
     public StateValue getStateValue(){
