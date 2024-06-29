@@ -82,18 +82,63 @@ public class ResolverSupport {
 
     public List<Cell> getCompleteBoardForCell() {
         int[][] board = new int[][]{
-                {1, 2, 3, 4, 5, 6, 7, 8, 9},
-                {1, 2, 3, 4, 5, 6, 7, 8, 9},
-                {1, 2, 3, 4, 5, 6, 7, 8, 9},
-                {1, 2, 3, 4, 5, 6, 7, 8, 9},
-                {1, 2, 3, 4, 5, 6, 7, 8, 9},
-                {1, 2, 3, 4, 5, 6, 7, 8, 9},
-                {1, 2, 3, 4, 5, 6, 7, 8, 9},
-                {1, 2, 3, 4, 5, 6, 7, 8, 9},
-                {1, 2, 3, 4, 5, 6, 7, 8, 9}
+                {3, 5, 8, 4, 9, 1, 7, 2, 6},
+                {2, 9, 1, 6, 7, 8, 5, 3, 4},
+                {4, 6, 7, 2, 5, 3, 9, 1, 8},
+                {5, 7, 2, 3, 8, 9, 6, 4, 1},
+                {1, 8, 4, 7, 2, 6, 3, 5, 9},
+                {9 ,3 ,6 ,5 ,1 ,4 ,8 ,7 ,2},
+                {6, 4, 9, 1, 3, 7, 2, 8, 5},
+                {8, 2, 3, 9, 4, 5, 1, 6, 7},
+                {7, 1, 5, 8, 6, 2, 4, 9, 3},
         };
 
         return converteIntToListCell(board);
+    }
+
+    @SuppressWarnings("unused")
+    public Cell[][] getCompleteArrayBoardForCell(){
+        Cell[][] board = new Cell[9][9];
+        for (Cell cell: getCompleteBoardForCell()) {
+            board[cell.getRow()][cell.getColumn()] = cell;
+        }
+
+        return board;
+    }
+
+    public Cell[][] getIncompleteArrayBoardForCell(String data, TypeCell typeCell, int otherValueInRowDelete,
+                                                   boolean subgridTest){
+        Cell[][] board = new Cell[9][9];
+        for (Cell cell: getCompleteBoardForCell()) {
+            board[cell.getRow()][cell.getColumn()] = cell;
+        }
+
+        Coordinate coordinate = new Coordinate(data.split(":")[0]);
+        TypeCell type = typeCell == null ? TypeCell.CANDIDATE : typeCell;
+
+        if(otherValueInRowDelete > 0){
+            Cell[] row = board[coordinate.getRow()];
+            for (Cell cell :  row) {
+                if(cell.getValue() == otherValueInRowDelete){
+                    board[cell.getRow()][cell.getColumn()] = new Cell(new Coordinate(cell.getRow(), cell.getColumn())
+                            , 0, TypeCell.CANDIDATE);
+                }
+            }
+        }
+
+        if(subgridTest){
+            for (int row = 0; row < 9; row++) {
+                if(board[row][coordinate.getColumn()].getValue() == otherValueInRowDelete){
+                    board[row][coordinate.getColumn()] = new Cell(new Coordinate(coordinate.getRow(), coordinate.getColumn()), 0, TypeCell.CANDIDATE);
+                }
+            }
+        }
+
+
+
+        board[coordinate.getRow()][coordinate.getColumn()] = new Cell(coordinate, 0, type);
+
+        return board;
     }
 
 

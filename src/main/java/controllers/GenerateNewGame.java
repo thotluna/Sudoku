@@ -59,7 +59,7 @@ public class GenerateNewGame {
         int attempts = 0;
         do{
             int value = new Random().nextInt(9) + 1;
-            cell = new Cell(coordinate, value, TypeCell.CANDIDATE);
+            cell = new Cell(coordinate, value, TypeCell.FIXED);
             attempts++;
             if(attempts > 10){
                 return null;

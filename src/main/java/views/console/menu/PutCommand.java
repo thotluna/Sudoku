@@ -1,6 +1,7 @@
 package views.console.menu;
 
 import controllers.GameController;
+import views.console.PutView;
 
 public class PutCommand extends PlayCommandBase{
 
@@ -10,7 +11,7 @@ public class PutCommand extends PlayCommandBase{
 
     @Override
     public void execute() {
-
+        new PutView(controller).interact();
     }
 
     @Override
