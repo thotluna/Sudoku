@@ -55,4 +55,16 @@ public class Coordinate {
     public int getRow() {
         return row;
     }
+
+    public int rowGroup(){
+        return getGroup(row);
+    }
+
+    public int columnGroup(){
+        return getGroup(column);
+    }
+
+    private int getGroup(int valueCoordinate){
+        return (int) Math.floor(valueCoordinate / 3.0);
+    }
 }
