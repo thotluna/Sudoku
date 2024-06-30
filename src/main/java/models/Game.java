@@ -66,4 +66,27 @@ public class Game {
     public boolean hasGame() {
         return initial != null && !initial.isEmpty();
     }
+
+    public boolean isComplete() {
+        for (Cell[] cells : board) {
+            for (Cell cell : cells) {
+                if (cell.getValue() == 0) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public boolean isAvailableCell(String coordinateString) {
+        Coordinate coordinate = new Coordinate(coordinateString);
+        return board[coordinate.getRow()][coordinate.getColumn()].getValue() == 0 ||
+                board[coordinate.getRow()][coordinate.getColumn()].getType() != TypeCell.FIXED;
+    }
+
+    public void addCell(Cell cell) {
+        assert board[cell.getRow()][cell.getColumn()].getValue() == 0
+                ||  board[cell.getRow()][cell.getColumn()].getType() != TypeCell.FIXED;
+        board[cell.getRow()][cell.getColumn()] = cell;
+    }
 }

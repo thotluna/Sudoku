@@ -1,7 +1,9 @@
 package controllers;
 
 import models.Cell;
+import models.Coordinate;
 import models.Session;
+import types.TypeCell;
 
 public class GameController implements Controller {
     private final Session session;
@@ -23,9 +25,22 @@ public class GameController implements Controller {
         return session.getBoard();
     }
 
-    public boolean isFinish() {
-        return false;
+    public boolean isGameOver(){
+        return session.isGameComplete();
+    }
+
+    public boolean isNotGameOver(){
+        return !isGameOver();
     }
 
 
+    public boolean isValidCell(String coordinate) {
+        return session.isAvailableCell(coordinate);
+    }
+
+    public void addCell(String data) {
+        Coordinate coordinate = new Coordinate(data.split(":")[0]);
+        int value  = Integer.parseInt(data.split(":")[1]);
+        session.addCell(new Cell(coordinate, value , TypeCell.CANDIDATE));
+    }
 }

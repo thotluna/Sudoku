@@ -5,23 +5,21 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import utils.Console;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 class ExitViewTest {
 
+    ExitView view;
     @Mock
     Console console;
     @Mock
     ExitController controller;
-    @InjectMocks
-    ExitView view;
+
     private AutoCloseable closeable;
 
     @BeforeEach
@@ -29,6 +27,7 @@ class ExitViewTest {
         closeable = MockitoAnnotations.openMocks(this);
 
         view = new ExitView();
+        view.setConsole(console);
     }
 
     @AfterEach
@@ -44,7 +43,7 @@ class ExitViewTest {
         view.interact(controller);
 
         verify(console).writeln(MessageRepository.getInstance()
-                .get("Please, enter the number of the option you want:"));
+                .get("sudoku.start-menu"));
 
     }
 }

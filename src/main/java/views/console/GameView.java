@@ -19,7 +19,7 @@ public class GameView {
             boardView.interact(board);
 
             menu.execute();
-        }while (controller.isFinish());
+        }while (controller.isNotGameOver());
 
         controller.nextState();
 

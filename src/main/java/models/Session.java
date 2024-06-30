@@ -54,4 +54,16 @@ public class Session {
     public Cell[][] getBoard(){
         return this.game.getBoard();
     }
+
+    public boolean isGameComplete() {
+        return game.isComplete();
+    }
+
+    public boolean isAvailableCell(String coordinate) {
+        return game.isAvailableCell(coordinate);
+    }
+
+    public void addCell(Cell cell) {
+        game.addCell(cell);
+    }
 }

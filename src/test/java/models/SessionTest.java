@@ -1,6 +1,6 @@
 package models;
 
-import controllers.ResolverSupport;
+import shared.ResolverSupport;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -44,5 +44,19 @@ class SessionTest {
         assertThat(session.getStateValue(), is(StateValue.IN_GAME));
         assertThat(session.hasGame(), is(true));
         assertThat(session.getBoard(), is(not(new ContainsValidCellsMatcher())));
+    }
+
+    @Test
+    void GiveCompleteGame_WhenIsCompletedCalled_ThenReturnTrue(){
+        ResolverSupport support = new ResolverSupport();
+        session.setCells(support.getCompleteBoardForCell());
+        assertThat(session.isGameComplete(), is(true));
+    }
+
+    @Test
+    void GiveIncompleteGame_WhenIsCompletedCalled_ThenReturnFalse(){
+        ResolverSupport support = new ResolverSupport();
+        session.setCells(support.getSolvableGameForCells());
+        assertThat(session.isGameComplete(), is(false));
     }
 }
