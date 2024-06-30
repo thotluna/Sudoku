@@ -1,7 +1,6 @@
-package shared;
+package controllers;
 
-import controllers.Resolver;
-import controllers.ResolverSupport;
+import shared.ResolverSupport;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
