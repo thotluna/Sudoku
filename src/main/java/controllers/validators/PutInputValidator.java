@@ -1,4 +1,4 @@
-package controllers.validators.put;
+package controllers.validators;
 
 import utils.models.Result;
 

@@ -2,7 +2,7 @@ package views.console;
 
 import controllers.GameController;
 import controllers.validators.PutValidatorFactory;
-import controllers.validators.put.PutInputValidator;
+import controllers.validators.PutInputValidator;
 import utils.WithConsole;
 import utils.models.Result;
 

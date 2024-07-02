@@ -1,6 +1,7 @@
 package controllers.validators.put;
 
 import controllers.GameController;
+import controllers.validators.PutInputValidator;
 import models.Board;
 import models.Coordinate;
 import utils.models.Result;

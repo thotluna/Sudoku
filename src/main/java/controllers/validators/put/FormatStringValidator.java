@@ -1,11 +1,10 @@
 package controllers.validators.put;
 
+import controllers.validators.PutInputValidator;
 import utils.models.Result;
 import views.console.MessageRepository;
 
-public class FormatStringValidator extends PutInputValidator{
-
-    public FormatStringValidator() {}
+public class FormatStringValidator extends PutInputValidator {
 
     public FormatStringValidator(PutInputValidator next) {
         super(next);
