@@ -39,9 +39,9 @@ public class Generator implements GeneratorBoard {
     private void generateSeek() {
         int nCell = 0;
         do{
-            int row = new Random().nextInt(Board.DIMENSION);
-            int col = new Random().nextInt(Board.DIMENSION);
-            int value = new Random().nextInt(Board.DIMENSION) + 1;
+            int row = new Random().nextInt(Board.DIMENSION_DEFAULT);
+            int col = new Random().nextInt(Board.DIMENSION_DEFAULT);
+            int value = new Random().nextInt(Board.DIMENSION_DEFAULT) + 1;
             Coordinate coordinate = new Coordinate(row, col);
             if(this.validate(value, coordinate )){
                 this.boardInitial.addCell(new Cell(coordinate, value, TypeCell.FIXED), true);
