@@ -11,7 +11,6 @@ public class Board {
 
     public static final int DIMENSION_DEFAULT = 9;
 
-
     public Board() {
         this.dimension = DIMENSION_DEFAULT;
         createBoard();
@@ -34,8 +33,6 @@ public class Board {
     public void clear() {
         createBoard();
     }
-
-
 
     public void addCell(Cell cell){
         assert cell != null;

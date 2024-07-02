@@ -37,20 +37,8 @@ public class Session {
         return state.getStateValue();
     }
 
-    public void setBoardInitial(Board initial) {
-        game.addCells(initial);
-    }
-
-    public void setSolution(Board solution) {
-        game.setSolution(solution);
-    }
-
     public boolean hasGame() {
         return game.hasGame();
-    }
-
-    public Board getBoard(){
-        return this.game.getBoard();
     }
 
     public boolean isGameComplete() {
@@ -63,6 +51,18 @@ public class Session {
 
     public void addCell(Cell cell) {
         game.addCell(cell);
+    }
+
+    public void setBoardInitial(Board initial) {
+        game.addCells(initial);
+    }
+
+    public Board getBoard(){
+        return this.game.getBoard();
+    }
+
+    public void setSolution(Board solution) {
+        game.setSolution(solution);
     }
 
     public Board getSolution() {
