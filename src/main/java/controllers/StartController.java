@@ -1,5 +1,6 @@
 package controllers;
 
+import controllers.generator.Generator;
 import models.Session;
 
 public class StartController implements Controller {
@@ -24,17 +25,13 @@ public class StartController implements Controller {
         session.endState();
     }
 
-    public boolean createNewGame() {
-        GenerateNewGame generator = new GenerateNewGame();
+    public void createNewGame() {
+        GeneratorBoard generator = new Generator();
+        generator.generateSudoku();
 
-        boolean success = !generator.generate().isEmpty();
-        if (success){
-            session.setCells(generator.getInitial());
-            session.setSolution(generator.getSolution());
-            session.inGameState();
-
-        }
-        return success;
+        session.setBoardInitial(generator.getBoardInitial());
+        session.setSolution(generator.getBoardSolution());
+        session.inGameState();
     }
 
     public void loadGame() {
