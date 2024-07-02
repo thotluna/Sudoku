@@ -1,5 +1,6 @@
 package controllers;
 
+import models.Board;
 import models.Cell;
 import models.Coordinate;
 import models.Session;
@@ -21,7 +22,7 @@ public class GameController implements Controller {
         session.nextState();
     }
 
-    public Cell[][] getBoard() {
+    public Board getBoard() {
         return session.getBoard();
     }
 
@@ -42,5 +43,9 @@ public class GameController implements Controller {
         Coordinate coordinate = new Coordinate(data.split(":")[0]);
         int value  = Integer.parseInt(data.split(":")[1]);
         session.addCell(new Cell(coordinate, value , TypeCell.CANDIDATE));
+    }
+
+    public Board getSolution() {
+        return session.getSolution();
     }
 }

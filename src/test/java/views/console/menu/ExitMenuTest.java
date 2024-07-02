@@ -8,9 +8,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import utils.Colors;
 import utils.Console;
-import views.console.MessageRepository;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class ExitMenuTest {

@@ -4,8 +4,8 @@ import views.PrintScreen;
 
 public abstract class SudokuMain {
 
-    protected Logic logic;
-    protected PrintScreen view;
+    protected final Logic logic;
+    protected final PrintScreen view;
 
     protected SudokuMain() {
         this.logic = new Logic();

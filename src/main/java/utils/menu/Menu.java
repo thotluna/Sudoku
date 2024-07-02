@@ -74,9 +74,11 @@ public class Menu extends WithConsole {
 
     private void printCommands(List<CommandBase> commands) {
         for (int i = 0; i < commands.size(); i++) {
-            String titleCommand = String.format("%s%d.- %s%S.%s", Colors.CYAN.get(), i+1, Colors.BLUE.get(),
-                    commands.get(i).getTitle(), Colors.DEFAULT.get());
-            console.writeln(titleCommand);
+            if(!commands.get(i).isSecret()){
+                String titleCommand = String.format("%s%d.- %s%S.%s", Colors.CYAN.get(), i+1, Colors.BLUE.get(),
+                        commands.get(i).getTitle(), Colors.DEFAULT.get());
+                console.writeln(titleCommand);
+            }
         }
     }
 

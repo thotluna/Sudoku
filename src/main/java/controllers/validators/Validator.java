@@ -5,7 +5,7 @@ import java.util.Collection;
 public abstract class Validator<T> {
 
     protected Validator<T> next;
-    protected String errorMessage;
+    protected final String errorMessage;
 
     protected Validator(String errorMessage) {
         this.next = null;
@@ -17,6 +17,7 @@ public abstract class Validator<T> {
         this.next = next;
     }
 
+    @SuppressWarnings("unused")
     public String validate(T validatable, Collection<T> collection) {
 
         String error = specificallyValidate(validatable, collection);

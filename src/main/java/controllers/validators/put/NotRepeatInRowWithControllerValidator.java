@@ -1,19 +1,14 @@
 package controllers.validators.put;
 
 import controllers.GameController;
-import models.Cell;
+import models.Board;
 import models.Coordinate;
 import utils.models.Result;
 import views.console.MessageRepository;
 
-import java.util.Arrays;
+public class NotRepeatInRowWithControllerValidator extends InputPutValidator {
 
-public class NotRepeatInRowValidator extends InputPutValidator {
-    public NotRepeatInRowValidator(GameController controller) {
-        super(controller);
-    }
-
-    public NotRepeatInRowValidator(GameController controller, PutInputValidator next) {
+    public NotRepeatInRowWithControllerValidator(GameController controller, PutInputValidator next) {
         super(controller, next);
     }
 
@@ -22,13 +17,9 @@ public class NotRepeatInRowValidator extends InputPutValidator {
         Coordinate coordinate = new Coordinate( validatable.split(":")[0]);
         int value = Integer.parseInt( validatable.split(":")[1]);
 
-        Cell[][] board = controller.getBoard();
+        Board board = controller.getBoard();
 
-        Cell[] row = board[coordinate.getRow()];
-
-        boolean exist = Arrays.stream(row).anyMatch(cell -> cell.getValue() == value);
-
-        if(exist){
+        if(board.hasValueInRow(value, coordinate.getRow())){
             String error = MessageRepository.getInstance().get("sudoku.validator.non-repeated-value-row");
             return  new Result<>(error, null);
         }

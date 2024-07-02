@@ -11,4 +11,9 @@ public abstract class PlayCommandBase extends CommandBase {
         this.controller = controller;
     }
 
+    @Override
+    public boolean isSecret() {
+        return false;
+    }
+
 }

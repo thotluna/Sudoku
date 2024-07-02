@@ -3,7 +3,7 @@ package utils.controllers;
 public abstract class Validator {
 
     protected Validator next;
-    protected String errorMessage;
+    protected final String errorMessage;
 
     protected Validator(String errorMessage) {
         this.next = null;

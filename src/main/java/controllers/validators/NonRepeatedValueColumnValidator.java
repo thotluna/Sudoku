@@ -6,10 +6,6 @@ import java.util.Collection;
 
 public class NonRepeatedValueColumnValidator extends Validator<Cell> {
 
-    public NonRepeatedValueColumnValidator(String errorMessage) {
-        super(errorMessage);
-    }
-
     public NonRepeatedValueColumnValidator(String errorMessage, Validator<Cell> next) {
         super(errorMessage, next);
     }
@@ -19,7 +15,7 @@ public class NonRepeatedValueColumnValidator extends Validator<Cell> {
 
         boolean exist = cells.stream()
                 .filter(cell -> cell != null && cell.getColumn() == validatable.getColumn())
-                .anyMatch(cell -> cell.containValue(validatable.getValue()));
+                .anyMatch(cell -> cell.containValue(validatable.value()));
 
         if(exist){
             return this.errorMessage;

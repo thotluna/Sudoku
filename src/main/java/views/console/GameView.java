@@ -1,7 +1,7 @@
 package views.console;
 
 import controllers.GameController;
-import models.Cell;
+import models.Board;
 import views.console.menu.PlayMenu;
 
 public class GameView {
@@ -15,7 +15,7 @@ public class GameView {
     public void interact(GameController controller) {
         PlayMenu menu = new PlayMenu(MessageRepository.getInstance().get("sudoku.start-menu"), controller);
         do{
-            Cell[][] board = controller.getBoard();
+            Board board = controller.getBoard();
             boardView.interact(board);
 
             menu.execute();

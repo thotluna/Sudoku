@@ -16,4 +16,5 @@ public class ExitGameCommand extends ExitCommandBase {
     public boolean isActive() {
         return true;
     }
+
 }

@@ -28,7 +28,6 @@ class NewGameCommandTest {
     void setUp() {
         closeable = MockitoAnnotations.openMocks(this);
         command = new NewGameCommand(MessageRepository.getInstance().get("sudoku.start-menu.new"), controller);
-        command.setConsole(console);
     }
 
     @AfterEach
@@ -38,7 +37,6 @@ class NewGameCommandTest {
 
     @Test
     void GiveNewCommand_WhenExecuteCalled_thenCreateNewGameCalled() {
-        when(controller.createNewGame()).thenReturn(false).thenReturn(true);
 
         command.execute();
 

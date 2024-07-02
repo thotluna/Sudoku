@@ -1,7 +1,5 @@
 package models;
 
-import java.util.List;
-
 public class Session {
 
     private final State state;
@@ -39,11 +37,11 @@ public class Session {
         return state.getStateValue();
     }
 
-    public void setCells(List<Cell> initial) {
+    public void setBoardInitial(Board initial) {
         game.addCells(initial);
     }
 
-    public void setSolution(int[][] solution) {
+    public void setSolution(Board solution) {
         game.setSolution(solution);
     }
 
@@ -51,7 +49,7 @@ public class Session {
         return game.hasGame();
     }
 
-    public Cell[][] getBoard(){
+    public Board getBoard(){
         return this.game.getBoard();
     }
 
@@ -65,5 +63,9 @@ public class Session {
 
     public void addCell(Cell cell) {
         game.addCell(cell);
+    }
+
+    public Board getSolution() {
+        return game.getSolution();
     }
 }
