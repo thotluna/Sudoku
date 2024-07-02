@@ -3,6 +3,9 @@ package models;
 import types.TypeCell;
 import utils.models.Interval;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 public class Board {
 
     private final int dimension;
@@ -21,7 +24,7 @@ public class Board {
         createBoard();
     }
 
-    public void createBoard() {
+    private void createBoard() {
         board = new Cell[dimension][dimension];
         for (int row = 0; row < dimension; row++) {
             for (int column = 0; column < dimension; column++) {
@@ -34,16 +37,20 @@ public class Board {
         createBoard();
     }
 
+    void forceAdd(Cell cell){
+        board[cell.getRow()][cell.getColumn()] = cell;
+    }
+
     public void addCell(Cell cell){
         assert cell != null;
         assert cell.type() != TypeCell.FIXED;
-        board[cell.getRow()][cell.getColumn()] = cell;
+        this.forceAdd(cell);
     }
 
     public void addCell(Cell cell, boolean override){
         assert cell != null;
         assert override;
-        board[cell.getRow()][cell.getColumn()] = cell;
+        this.forceAdd(cell);
     }
 
     public Cell getCell(int row, int column){
@@ -81,11 +88,11 @@ public class Board {
     public boolean isBusyCell(int row, int column){
         assert new Interval(0, dimension -1).isWithinRange(row);
         assert new Interval(0, dimension -1).isWithinRange(column);
-        return this.isNullCell(row, column) && board[row][column].type() == TypeCell.FIXED;
+        return !this.isNullCell(row, column) && board[row][column].type() == TypeCell.FIXED;
     }
 
     public boolean isBusyCell(Coordinate coordinate){
-        return this.isNullCell(coordinate.getRow(), coordinate.getColumn());
+        return this.isBusyCell(coordinate.getRow(), coordinate.getColumn());
     }
 
     public Board newCopy(){
@@ -165,6 +172,18 @@ public class Board {
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Board board1 = (Board) o;
+        return dimension == board1.dimension && Arrays.deepEquals(board, board1.board);
+    }
 
-
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(dimension);
+        result = 31 * result + Arrays.deepHashCode(board);
+        return result;
+    }
 }

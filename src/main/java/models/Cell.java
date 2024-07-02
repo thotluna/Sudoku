@@ -14,6 +14,10 @@ public record Cell(Coordinate coordinate, int value, TypeCell type) {
         return new Cell(new Coordinate(row, column), 0, TypeCell.CANDIDATE);
     }
 
+    public static Cell newCellCandidate(int row, int column, int value){
+        return new Cell(new Coordinate(row, column), value, TypeCell.CANDIDATE);
+    }
+
     public static Cell nullCell(Coordinate coordinate) {
         return nullCell(coordinate.getRow(), coordinate.getColumn());
     }
@@ -32,6 +36,7 @@ public record Cell(Coordinate coordinate, int value, TypeCell type) {
         return coordinate.getRow();
     }
 
+    @SuppressWarnings("unused")
     public boolean containValue(int value) {
         return this.value == value;
     }
@@ -44,4 +49,5 @@ public record Cell(Coordinate coordinate, int value, TypeCell type) {
     public boolean isEmpty() {
         return value == 0;
     }
+
 }
