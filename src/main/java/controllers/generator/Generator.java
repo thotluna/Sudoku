@@ -8,7 +8,6 @@ import types.TypeCell;
 
 import java.util.*;
 
-
 public class Generator implements GeneratorBoard {
     private final Board boardInitial;
     private Board boardSolution;
@@ -34,7 +33,6 @@ public class Generator implements GeneratorBoard {
 
 
     }
-
 
     private void generateSeek() {
         int nCell = 0;

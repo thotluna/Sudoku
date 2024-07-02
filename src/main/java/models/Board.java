@@ -95,7 +95,7 @@ public class Board {
         Board newBoard = new Board();
         for (int row = 0; row < dimension; row++) {
             for (int column = 0; column < dimension; column++) {
-                newBoard.addCell(this.board[row][column]);
+                newBoard.addCell(this.board[row][column], true);
             }
         }
         return newBoard;
