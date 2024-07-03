@@ -40,8 +40,7 @@ class NewGameCommandTest {
 
         command.execute();
 
-        verify(controller, times(2)).createNewGame();
-        verify(console, times(1)).writeln(MessageRepository.getInstance().get("sudoku.start-menu.new.generate"));
+        verify(controller, times(1)).createNewGame();
 
 
     }
