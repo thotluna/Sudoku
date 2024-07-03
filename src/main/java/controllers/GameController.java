@@ -50,4 +50,8 @@ public class GameController implements Controller {
     public Board getSolution() {
         return session.getSolution();
     }
+
+    public SaveController getSaveController(){
+        return new SaveController(session);
+    }
 }
