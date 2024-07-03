@@ -94,6 +94,10 @@ public class Board {
     public boolean isBusyCell(Coordinate coordinate){
         return this.isBusyCell(coordinate.getRow(), coordinate.getColumn());
     }
+    public boolean isBusyCell(String coordinateString){
+        Coordinate coordinate = new Coordinate(coordinateString);
+        return this.isBusyCell(coordinate.getRow(), coordinate.getColumn());
+    }
 
     public Board newCopy(){
         Board newBoard = new Board();
@@ -185,5 +189,16 @@ public class Board {
         int result = Objects.hash(dimension);
         result = 31 * result + Arrays.deepHashCode(board);
         return result;
+    }
+
+    public boolean isEmptyComplete() {
+        for (int row = 0; row < dimension; row++) {
+            for (int col = 0; col < dimension; col++) {
+                if(!this.isNullCell(row, col)){
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }

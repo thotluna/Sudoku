@@ -1,7 +1,5 @@
 package models;
 
-import types.TypeCell;
-
 public class Game {
     private Board initial;
     private Board solution;
@@ -18,13 +16,22 @@ public class Game {
     }
 
     public void restart() {
-        board = initial;
+        assert !initial.isEmptyComplete();
+        board = initial.newCopy();
     }
 
     public void addCells(Board initialBoard) {
         assert initialBoard != null;
-        initial = initialBoard;
-        board = initialBoard;
+        initial = initialBoard.newCopy();
+        board = initialBoard.newCopy();
+    }
+
+    public boolean hasGame() {
+        return !initial.isEmptyComplete();
+    }
+
+    public boolean isGameOver() {
+        return board.isComplete() && board.equals(solution);
     }
 
     public Board getBoard() {
@@ -33,25 +40,6 @@ public class Game {
 
     public void setSolution(Board solution) {
         this.solution = solution;
-    }
-
-    public boolean hasGame() {
-        return initial != null;
-    }
-
-    public boolean isComplete() {
-        return board.isComplete();
-    }
-
-    public boolean isAvailableCell(String coordinateString) {
-        Coordinate coordinate = new Coordinate(coordinateString);
-        return board.isBusyCell(coordinate);
-    }
-
-    public void addCell(Cell cell) {
-        assert board.isNullCell(cell.coordinate())
-                ||  board.getCell(cell.coordinate()).type() != TypeCell.FIXED;
-        board.addCell(cell);
     }
 
     public Board getSolution(){

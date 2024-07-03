@@ -22,23 +22,12 @@ public record Cell(Coordinate coordinate, int value, TypeCell type) {
         return nullCell(coordinate.getRow(), coordinate.getColumn());
     }
 
-
-    @SuppressWarnings("unused")
-    public boolean hasThisCoordinate(Coordinate coordinate) {
-        return this.coordinate.equals(coordinate);
-    }
-
     public int getColumn() {
         return coordinate.getColumn();
     }
 
     public int getRow() {
         return coordinate.getRow();
-    }
-
-    @SuppressWarnings("unused")
-    public boolean containValue(int value) {
-        return this.value == value;
     }
 
     @Override

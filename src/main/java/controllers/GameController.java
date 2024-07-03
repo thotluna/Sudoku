@@ -8,9 +8,11 @@ import types.TypeCell;
 
 public class GameController implements Controller {
     private final Session session;
+    private final Board board;
 
     public GameController(Session session) {
         this.session = session;
+        this.board = session.getBoard();
     }
 
     @Override
@@ -23,7 +25,7 @@ public class GameController implements Controller {
     }
 
     public Board getBoard() {
-        return session.getBoard();
+        return board;
     }
 
     public boolean isGameOver(){
@@ -36,13 +38,13 @@ public class GameController implements Controller {
 
 
     public boolean isValidCell(String coordinate) {
-        return session.isAvailableCell(coordinate);
+        return !board.isBusyCell(coordinate);
     }
 
     public void addCell(String data) {
         Coordinate coordinate = new Coordinate(data.split(":")[0]);
         int value  = Integer.parseInt(data.split(":")[1]);
-        session.addCell(new Cell(coordinate, value , TypeCell.CANDIDATE));
+        board.addCell(new Cell(coordinate, value , TypeCell.CANDIDATE));
     }
 
     public Board getSolution() {
