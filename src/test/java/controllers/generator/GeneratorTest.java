@@ -11,23 +11,26 @@ import static org.hamcrest.Matchers.*;
 class GeneratorTest {
 
     GeneratorBoard generator;
+    Board initial;
+    Board solution;
 
     @BeforeEach
     void setUp() {
         generator = new Generator();
-
+        generator.generateSudoku();
+        initial = generator.getBoardInitial();
+        solution = generator.getBoardSolution();
     }
 
     @Test
-    void Give_When_then(){
-        int times = 2;
-        do{
-            generator.generateSudoku();
-            Board initial = generator.getBoardInitial();
-            Board solution = generator.getBoardSolution();
-            assertThat(initial.isComplete(), is(false));
-            assertThat(solution.isComplete(), is(true));
-            times--;
-        }while (times > 0);
+    void GiveGenerateGame_WhenIsEmptyCompleteCalled_TheBoardFalseAndSolutionFalse(){
+        assertThat(initial.isEmptyComplete(), is(false));
+        assertThat(solution.isEmptyComplete(), is(false));
+    }
+
+    @Test
+    void GiveGenerateGame_WhenIsCompleteCalled_TheBoardFalseAndSolutionTrue(){
+        assertThat(initial.isComplete(), is(false));
+        assertThat(solution.isComplete(), is(true));
     }
 }
