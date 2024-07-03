@@ -8,11 +8,10 @@ import types.TypeCell;
 
 public class GameController implements Controller {
     private final Session session;
-    private final Board board;
+    private Board board;
 
     public GameController(Session session) {
         this.session = session;
-        this.board = session.getBoard();
     }
 
     @Override
@@ -24,7 +23,12 @@ public class GameController implements Controller {
         session.nextState();
     }
 
+    public void loadBoard() {
+        this.board = session.getBoard();
+    }
+
     public Board getBoard() {
+
         return board;
     }
 
@@ -54,4 +58,6 @@ public class GameController implements Controller {
     public SaveController getSaveController(){
         return new SaveController(session);
     }
+
+
 }
