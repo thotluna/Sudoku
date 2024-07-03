@@ -59,6 +59,7 @@ public class Board {
         return board[row][column];
     }
 
+    @SuppressWarnings("unused")
     public Cell getCell(Coordinate coordinate){
         return this.getCell(coordinate.getRow(), coordinate.getColumn());
     }
@@ -84,7 +85,7 @@ public class Board {
         return this.isNullCell(coordinate.getRow(), coordinate.getColumn());
     }
 
-    @SuppressWarnings("unused")
+
     public boolean isBusyCell(int row, int column){
         assert new Interval(0, dimension -1).isWithinRange(row);
         assert new Interval(0, dimension -1).isWithinRange(column);
@@ -96,7 +97,7 @@ public class Board {
     }
     public boolean isBusyCell(String coordinateString){
         Coordinate coordinate = new Coordinate(coordinateString);
-        return this.isBusyCell(coordinate.getRow(), coordinate.getColumn());
+        return this.isBusyCell(coordinate);
     }
 
     public Board newCopy(){
