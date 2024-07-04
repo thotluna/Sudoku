@@ -5,9 +5,12 @@ public class Session {
     private final State state;
     private final Game game;
 
+    private final Register register;
+
     public Session(Game game) {
         this.state = new State();
         this.game = game;
+        this.register = new Register(game);
     }
 
     public void start() {
@@ -66,17 +69,27 @@ public class Session {
     }
 
     public void undo() {
+        register.undo();
 
     }
 
     public boolean isUndoable() {
-        return false;
+        return register.undoable();
     }
 
     public void redo() {
+        register.redo();
     }
 
     public boolean isRedoable() {
-        return false;
+        return register.redoable();
+    }
+
+    public void addCell(Cell cell) {
+        game.addCell(cell);
+    }
+
+    public void register() {
+        register.register();
     }
 }

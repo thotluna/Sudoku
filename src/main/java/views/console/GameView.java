@@ -13,8 +13,8 @@ public class GameView {
     }
 
     public void interact(GameController controller) {
-        PlayMenu menu = new PlayMenu(MessageRepository.getInstance().get("sudoku.start-menu"), controller);
         do{
+            PlayMenu menu = new PlayMenu(MessageRepository.getInstance().get("sudoku.start-menu"), controller);
             Board board = controller.getBoard();
             boardView.interact(board);
 

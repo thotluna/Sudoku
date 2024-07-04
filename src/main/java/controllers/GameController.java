@@ -51,7 +51,8 @@ public class GameController implements Controller {
     public void addCell(String data) {
         Coordinate coordinate = new Coordinate(data.split(":")[0]);
         int value  = Integer.parseInt(data.split(":")[1]);
-        board.addCell(new Cell(coordinate, value , TypeCell.CANDIDATE));
+        session.addCell(new Cell(coordinate, value , TypeCell.CANDIDATE));
+
     }
 
     public Board getSolution() {
@@ -79,4 +80,7 @@ public class GameController implements Controller {
     }
 
 
+    public void register() {
+        session.register();
+    }
 }

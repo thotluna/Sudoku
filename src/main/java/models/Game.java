@@ -55,4 +55,20 @@ public class Game {
     public Board getInitial() {
         return this.initial;
     }
+
+    public Memento createMemento() {
+        return new Memento(board.newCopy());
+    }
+
+    public void addCell(Cell cell){
+        board.addCell(cell);
+    }
+
+    public void setMemento(Memento memento) {
+        for (int row = 0; row < board.getDimension(); row++) {
+            for (int col = 0; col < board.getDimension(); col++) {
+                board.addCell(memento.getBoard().getCell(row, col));
+            }
+        }
+    }
 }
