@@ -32,7 +32,7 @@ public record Cell(Coordinate coordinate, int value, TypeCell type) {
 
     @Override
     public String toString() {
-        return coordinate.toString() + ":" + value;
+        return coordinate.toString() + ":" + value + type.toString();
     }
 
     public boolean isEmpty() {

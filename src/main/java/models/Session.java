@@ -60,4 +60,8 @@ public class Session {
     public Board getSolution() {
         return game.getSolution();
     }
+
+    public Game getGame() {
+        return game;
+    }
 }

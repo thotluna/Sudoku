@@ -4,6 +4,7 @@ import models.Board;
 import models.Cell;
 import models.Coordinate;
 import models.Session;
+import repositoy.FileRepository;
 import types.TypeCell;
 
 public class GameController implements Controller {
@@ -56,7 +57,8 @@ public class GameController implements Controller {
     }
 
     public SaveController getSaveController(){
-        return new SaveController(session);
+        Repository repository = new FileRepository();
+        return new SaveController(session, repository);
     }
 
 

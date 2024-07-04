@@ -9,6 +9,12 @@ public class Game {
         this.start();
     }
 
+    public Game(Board initial, Board solution, Board board) {
+        this.initial = initial;
+        this.solution = solution;
+        this.board = board;
+    }
+
     public void start(){
         solution = new Board();
         initial = new Board();
@@ -44,5 +50,9 @@ public class Game {
 
     public Board getSolution(){
         return solution;
+    }
+
+    public Board getInitial() {
+        return this.initial;
     }
 }
