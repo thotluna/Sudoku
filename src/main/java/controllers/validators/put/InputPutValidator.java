@@ -1,6 +1,7 @@
 package controllers.validators.put;
 
 import controllers.GameController;
+import controllers.validators.PutInputValidator;
 
 public abstract class InputPutValidator extends PutInputValidator {
 

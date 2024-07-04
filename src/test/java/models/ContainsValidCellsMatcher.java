@@ -3,12 +3,12 @@ package models;
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 
-public class ContainsValidCellsMatcher extends BaseMatcher<Cell[][]> {
+public class ContainsValidCellsMatcher extends BaseMatcher<Board> {
 
     @Override
     public boolean matches(Object o) {
-        Cell[][] board = (Cell[][]) o;
-        for (Cell[] row : board) {
+        Board board = (Board) o;
+        for (Cell[] row : board.get()) {
             for (Cell cell : row) {
                 if (!cell.isEmpty()) {
                     return false;

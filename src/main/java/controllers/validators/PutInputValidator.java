@@ -1,10 +1,10 @@
-package controllers.validators.put;
+package controllers.validators;
 
 import utils.models.Result;
 
 public abstract class PutInputValidator {
 
-    protected PutInputValidator next;
+    protected final PutInputValidator next;
 
     protected PutInputValidator() {
         this.next = null;

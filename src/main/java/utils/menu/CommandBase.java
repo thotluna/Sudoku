@@ -10,8 +10,10 @@ public abstract class CommandBase {
 
     public abstract void execute();
     public abstract boolean isActive();
+    public abstract boolean isSecret();
 
     public String getTitle() {
         return title;
     }
+
 }

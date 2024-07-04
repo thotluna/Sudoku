@@ -1,12 +1,15 @@
 package controllers;
 
+import models.Board;
 import models.Cell;
 import models.Coordinate;
 import models.Session;
+import repositoy.FileRepository;
 import types.TypeCell;
 
 public class GameController implements Controller {
     private final Session session;
+    private Board board;
 
     public GameController(Session session) {
         this.session = session;
@@ -21,8 +24,13 @@ public class GameController implements Controller {
         session.nextState();
     }
 
-    public Cell[][] getBoard() {
-        return session.getBoard();
+    public void loadBoard() {
+        this.board = session.getBoard();
+    }
+
+    public Board getBoard() {
+
+        return board;
     }
 
     public boolean isGameOver(){
@@ -35,12 +43,23 @@ public class GameController implements Controller {
 
 
     public boolean isValidCell(String coordinate) {
-        return session.isAvailableCell(coordinate);
+        return !board.isBusyCell(coordinate);
     }
 
     public void addCell(String data) {
         Coordinate coordinate = new Coordinate(data.split(":")[0]);
         int value  = Integer.parseInt(data.split(":")[1]);
-        session.addCell(new Cell(coordinate, value , TypeCell.CANDIDATE));
+        board.addCell(new Cell(coordinate, value , TypeCell.CANDIDATE));
     }
+
+    public Board getSolution() {
+        return session.getSolution();
+    }
+
+    public SaveController getSaveController(){
+        Repository repository = new FileRepository();
+        return new SaveController(session, repository);
+    }
+
+
 }

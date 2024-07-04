@@ -8,9 +8,9 @@ public class PutValidatorFactory {
 
     public PutValidatorFactory(GameController controller) {
 
-        PutInputValidator notRepeatSubgridValidator = new NotRepeatSubgridValidator(controller);
-        PutInputValidator notRepeatColumnValidator = new NotRepeatInColumnValidator(controller, notRepeatSubgridValidator);
-        PutInputValidator notRepeatRowValidator = new NotRepeatInRowValidator(controller, notRepeatColumnValidator);
+        PutInputValidator notRepeatSubgridValidator = new NotRepeatSubgridWithControllerValidator(controller);
+        PutInputValidator notRepeatColumnValidator = new NotRepeatInColumnWithControllerValidator(controller, notRepeatSubgridValidator);
+        PutInputValidator notRepeatRowValidator = new NotRepeatInRowWithControllerValidator(controller, notRepeatColumnValidator);
         PutInputValidator availableCoordinateValidator = new AvailableCoordinateValidator( controller, notRepeatRowValidator);
         PutInputValidator valueFormatValidator = new ValueFormatValidator(availableCoordinateValidator);
         PutInputValidator columnFormatValidator = new ColumnFormatValidator(valueFormatValidator);

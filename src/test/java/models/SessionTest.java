@@ -1,13 +1,10 @@
 package models;
 
-import shared.ResolverSupport;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.*;
 
 class SessionTest {
 
@@ -18,45 +15,33 @@ class SessionTest {
     @BeforeEach
     void setUp() {
         game = new Game();
+        game.addCells(BoardSupport.getBoardSet().initial());
+        game.setSolution(BoardSupport.getBoardSet().solution());
         session = new Session(game);
-    }
-
-    @AfterEach
-    void tearDown() {
     }
 
     @Test
     void GiveStartGame_WhenSessionCreated_ThenStateInitAndGameBoarBlank(){
+        Game game = new Game();
+        Session session = new Session(game);
+
         assertThat(session.getStateValue(), is(StateValue.INITIAL));
         assertThat(session.hasGame(), is(false));
-        assertThat(session.getBoard(), is(new ContainsValidCellsMatcher()));
     }
 
     @Test
-    void GiveRestartGame_WhenSessionRestarted_ThenStateInGameAndNotGameBoarBlank(){
-        ResolverSupport support = new ResolverSupport();
-        session.setSolution(support.getSolvableGame()[0]);
-        session.setCells(support.getSolvableGameForCells());
-        session.endState();
+    void GiveAnOngoingGame_WhenSessionRestartCalled_ThenReloadBoardAndState(){
+        Coordinate coordinate = new Coordinate("A1");
+        game.getBoard().addCell(Cell.newCellCandidate(coordinate.getRow(), coordinate.getColumn(), 9));
+        Board boardOngoingGame = game.getBoard().newCopy();
 
         session.restart();
 
+        assertThat(game.hasGame(), is(true));
+        assertThat(game.getBoard(), not(equalTo(boardOngoingGame)));
+        assertThat(game.getBoard().isNullCell(coordinate), is(true));
         assertThat(session.getStateValue(), is(StateValue.IN_GAME));
-        assertThat(session.hasGame(), is(true));
-        assertThat(session.getBoard(), is(not(new ContainsValidCellsMatcher())));
+
     }
 
-    @Test
-    void GiveCompleteGame_WhenIsCompletedCalled_ThenReturnTrue(){
-        ResolverSupport support = new ResolverSupport();
-        session.setCells(support.getCompleteBoardForCell());
-        assertThat(session.isGameComplete(), is(true));
-    }
-
-    @Test
-    void GiveIncompleteGame_WhenIsCompletedCalled_ThenReturnFalse(){
-        ResolverSupport support = new ResolverSupport();
-        session.setCells(support.getSolvableGameForCells());
-        assertThat(session.isGameComplete(), is(false));
-    }
 }

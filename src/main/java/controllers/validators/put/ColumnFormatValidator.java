@@ -1,5 +1,6 @@
 package controllers.validators.put;
 
+import controllers.validators.PutInputValidator;
 import utils.models.Result;
 import views.console.MessageRepository;
 
@@ -8,8 +9,6 @@ public class ColumnFormatValidator extends PutInputValidator {
     private static final String ERROR = String.format("%s %s",
             MessageRepository.getInstance().get("sudoku.put-view.put.error"),
                         MessageRepository.getInstance().get("sudoku.put-view.put.error-coordinate"));
-
-    public ColumnFormatValidator() {}
 
     public ColumnFormatValidator(PutInputValidator next) {
         super(next);

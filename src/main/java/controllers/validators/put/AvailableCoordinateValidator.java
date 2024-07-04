@@ -1,14 +1,11 @@
 package controllers.validators.put;
 
 import controllers.GameController;
+import controllers.validators.PutInputValidator;
 import utils.models.Result;
 import views.console.MessageRepository;
 
 public class AvailableCoordinateValidator extends InputPutValidator {
-
-    public AvailableCoordinateValidator(GameController controller) {
-        super(controller);
-    }
 
     public AvailableCoordinateValidator( GameController controller, PutInputValidator next) {
         super( controller, next);

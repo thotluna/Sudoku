@@ -40,7 +40,6 @@ class StartMenuTest {
     @Test
     void GiveStart_WhenStarMenuCalled_ThenTitleIsPrint() {
         when(console.readString(any())).thenReturn("1");
-        when(controller.createNewGame()).thenReturn(true);
 
         menu.execute();
 
@@ -52,7 +51,6 @@ class StartMenuTest {
     @Test
     void GiveStart_WhenStarMenuCalled_ThenTitleCommandsPrint() {
         when(this.console.readString(any())).thenReturn("1");
-        when(controller.createNewGame()).thenReturn(true);
 
         menu.execute();
 
