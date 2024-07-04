@@ -107,8 +107,8 @@ class BoardTest {
 
     @Test
     void GiveBoard_WhenIsBusyACellWithCoordinateCalled_ThenReturnIsBusy(){
-        String coordinateBussyString = "A1";
-        Coordinate coordinateBusy = new Coordinate(coordinateBussyString);
+        String coordinateBusyString = "A1";
+        Coordinate coordinateBusy = new Coordinate(coordinateBusyString);
         Cell cellBusy = new Cell(coordinateBusy, 1, TypeCell.FIXED);
         board.addCell(cellBusy, true);
 
@@ -116,7 +116,7 @@ class BoardTest {
         board.addCell(cell, true);
 
         assertThat(board, not(isEmptyBoard()));
-        assertThat(board.isBusyCell(coordinateBussyString), is(true));
+        assertThat(board.isBusyCell(coordinateBusyString), is(true));
         assertThat(board.isBusyCell(0,1), is(false));
         assertThat(board.isBusyCell(0,2), is(false));
     }
