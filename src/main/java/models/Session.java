@@ -21,6 +21,7 @@ public class Session {
     public void restart(){
         assert game.hasGame();
         this.game.restart();
+        register();
         this.state.restart();
     }
 
@@ -53,7 +54,9 @@ public class Session {
     }
 
     public void setBoardInitial(Board initial) {
+
         game.addCells(initial);
+        register();
     }
 
     public void setSolution(Board solution) {

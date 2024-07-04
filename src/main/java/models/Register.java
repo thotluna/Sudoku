@@ -30,7 +30,7 @@ public class Register {
     }
 
     public void undo() {
-
+        assert undoable();
         this.firstPreview++;
         this.game.setMemento(mementos.get(firstPreview));
     }
@@ -41,6 +41,7 @@ public class Register {
 
 
     public void redo() {
+        assert redoable();
         this.firstPreview--;
         this.game.setMemento(mementos.get(firstPreview));
     }
