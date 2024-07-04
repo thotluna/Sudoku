@@ -37,7 +37,7 @@ public class Game {
     }
 
     public boolean isGameOver() {
-        return board.isComplete() && board.equals(solution);
+        return board.isComplete();
     }
 
     public Board getBoard() {
