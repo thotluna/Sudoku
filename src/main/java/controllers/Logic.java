@@ -3,6 +3,7 @@ package controllers;
 import models.Game;
 import models.Session;
 import models.StateValue;
+import repositoy.FileRepository;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,7 +19,11 @@ public class Logic {
         this.controllers = new HashMap<>();
         this.controllers.put(StateValue.INITIAL, new StartController(this.session));
         this.controllers.put(StateValue.LOAD, new LoadController(this.session));
-        this.controllers.put(StateValue.IN_GAME, new GameController(this.session));
+        this.controllers.put(
+                StateValue.IN_GAME,
+                new GameController(
+                        this.session,
+                        new SaveController(this.session, new FileRepository())));
         this.controllers.put(StateValue.OUT_GAME, new ExitController(this.session));
     }
 

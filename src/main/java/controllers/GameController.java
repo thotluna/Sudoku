@@ -4,14 +4,16 @@ import models.Board;
 import models.Cell;
 import models.Coordinate;
 import models.Session;
-import repositoy.FileRepository;
 import types.TypeCell;
 
 public class GameController implements Controller {
     private final Session session;
+
+    private final SaveController saveController;
     private Board board;
 
-    public GameController(Session session) {
+    public GameController(Session session, SaveController saveController) {
+        this.saveController = saveController;
         this.session = session;
     }
 
@@ -57,8 +59,23 @@ public class GameController implements Controller {
     }
 
     public SaveController getSaveController(){
-        Repository repository = new FileRepository();
-        return new SaveController(session, repository);
+        return saveController;
+    }
+
+    public void undo() {
+        session.undo();
+    }
+
+    public boolean isUndoable(){
+        return session.isUndoable();
+    }
+
+    public void redo() {
+        session.redo();
+    }
+
+    public boolean isRedoable(){
+        return session.isRedoable();
     }
 
 

@@ -64,4 +64,19 @@ public class Session {
     public Game getGame() {
         return game;
     }
+
+    public void undo() {
+
+    }
+
+    public boolean isUndoable() {
+        return false;
+    }
+
+    public void redo() {
+    }
+
+    public boolean isRedoable() {
+        return false;
+    }
 }
