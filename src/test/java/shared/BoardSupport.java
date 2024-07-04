@@ -1,4 +1,8 @@
-package models;
+package shared;
+
+import models.Board;
+import models.Boards;
+import models.Cell;
 
 public class BoardSupport {
 

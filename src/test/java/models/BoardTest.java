@@ -5,7 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import types.TypeCell;
 
-import static models.BoardSupport.getBoardComplete;
+import static shared.BoardSupport.getBoardComplete;
 import static models.IsBoardMatcher.isEmptyBoard;
 
 import static org.hamcrest.MatcherAssert.assertThat;
