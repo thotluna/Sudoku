@@ -1,4 +1,4 @@
-package views.console.menu;
+package shared;
 
 import utils.Colors;
 

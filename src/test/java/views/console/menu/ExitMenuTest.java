@@ -6,10 +6,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import utils.Colors;
 import utils.Console;
 
 import static org.mockito.Mockito.*;
+import static shared.CommandSupport.createTitleCommand;
 
 class ExitMenuTest {
 
@@ -75,9 +75,5 @@ class ExitMenuTest {
 
     }
 
-    private String createTitleCommand(String title, int order){
-        return String.format("%s%d.- %s%S.%s", Colors.CYAN.get(), order, Colors.BLUE.get(),
-                title, Colors.DEFAULT.get());
-    }
 
 }
