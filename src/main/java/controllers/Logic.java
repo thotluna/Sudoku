@@ -18,7 +18,10 @@ public class Logic {
         this.session = new Session(game);
         this.controllers = new HashMap<>();
         this.controllers.put(StateValue.INITIAL, new StartController(this.session));
-        this.controllers.put(StateValue.LOAD, new LoadController(this.session));
+        this.controllers.put(StateValue.LOAD,
+                new LoadController(
+                        this.session,
+                         new FileRepository()));
         this.controllers.put(
                 StateValue.IN_GAME,
                 new GameController(

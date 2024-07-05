@@ -54,7 +54,6 @@ public class Session {
     }
 
     public void setBoardInitial(Board initial) {
-
         game.addCells(initial);
         register();
     }
@@ -69,6 +68,12 @@ public class Session {
 
     public Game getGame() {
         return game;
+    }
+
+    public void loadGame(Game game){
+        setBoardInitial(game.getBoard());
+        setSolution(game.getSolution());
+        register();
     }
 
     public void undo() {
