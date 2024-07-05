@@ -5,6 +5,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
+import org.mockito.MockedStatic;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import utils.Colors;
 import utils.Console;
@@ -29,7 +31,6 @@ class StartMenuTest {
         title = "title";//MessageRepository.getInstance().get("sudoku.start-menu");
 
         menu = new StartMenu(title, controller);
-        menu.setConsole(console);
     }
 
     @AfterEach
@@ -39,28 +40,33 @@ class StartMenuTest {
 
     @Test
     void GiveStart_WhenStarMenuCalled_ThenTitleIsPrint() {
-        when(console.readString(any())).thenReturn("1");
+        try (MockedStatic<Console> utilities = Mockito.mockStatic(Console.class)) {
+            utilities.when(Console::getInstance).thenReturn(console);
+            when(console.readString(any())).thenReturn("1");
 
-        menu.execute();
+            menu.execute();
 
-        verify(console).readString(any());
-        verify(console).writeln(title);
-
+            verify(console).readString(any());
+            verify(console).writeln(title);
+        }
     }
 
     @Test
     void GiveStart_WhenStarMenuCalled_ThenTitleCommandsPrint() {
-        when(this.console.readString(any())).thenReturn("1");
+        try (MockedStatic<Console> utilities = Mockito.mockStatic(Console.class)) {
+            utilities.when(Console::getInstance).thenReturn(console);
+            when(this.console.readString(any())).thenReturn("1");
 
-        menu.execute();
+            menu.execute();
 
-        String newGameCommandTitle = String.format("%s%d.- %s%S.%s", Colors.CYAN.get(), 1, Colors.BLUE.get(),
-                MessageRepository.getInstance().get("sudoku.start-menu.new"), Colors.DEFAULT.get());
-        String loadGameCommandTitle = String.format("%s%d.- %s%S.%s", Colors.CYAN.get(), 2, Colors.BLUE.get(),
-                MessageRepository.getInstance().get("sudoku.start-menu.load"), Colors.DEFAULT.get());
+            String newGameCommandTitle = String.format("%s%d.- %s%S.%s", Colors.CYAN.get(), 1, Colors.BLUE.get(),
+                    MessageRepository.getInstance().get("sudoku.start-menu.new"), Colors.DEFAULT.get());
+            String loadGameCommandTitle = String.format("%s%d.- %s%S.%s", Colors.CYAN.get(), 2, Colors.BLUE.get(),
+                    MessageRepository.getInstance().get("sudoku.start-menu.load"), Colors.DEFAULT.get());
 
-        verify(this.console).writeln(newGameCommandTitle);
-        verify(this.console).writeln(loadGameCommandTitle);
+            verify(this.console).writeln(newGameCommandTitle);
+            verify(this.console).writeln(loadGameCommandTitle);
+        }
     }
 
 }

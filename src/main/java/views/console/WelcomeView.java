@@ -1,8 +1,8 @@
 package views.console;
 
-import utils.WithConsole;
+import utils.Console;
 
-public class WelcomeView extends WithConsole {
+public class WelcomeView {
 
     void interact(){
 
@@ -10,10 +10,10 @@ public class WelcomeView extends WithConsole {
         String title = String.format("%s %S %s", lateral, "welcome to Sudoku Game", lateral);
         String top = "_".repeat(title.length());
         String bottom = "-".repeat(title.length());
-        console.writeln(top);
-        console.writeln(top);
-        console.writeln(title);
-        console.writeln(bottom);
-        console.writeln(bottom + "\n");
+        Console.getInstance().writeln(top);
+        Console.getInstance().writeln(top);
+        Console.getInstance().writeln(title);
+        Console.getInstance().writeln(bottom);
+        Console.getInstance().writeln(bottom + "\n");
     }
 }

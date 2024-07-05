@@ -1,9 +1,9 @@
 package views.console;
 
 import utils.Colors;
-import utils.WithConsole;
+import utils.Console;
 
-public class GameOverView extends WithConsole {
+public class GameOverView {
     public void interact() {
 
         String banner = """
@@ -16,11 +16,11 @@ public class GameOverView extends WithConsole {
                                                                                                                    \s
                 """;
 
-        console.writeln("");
-        console.writeln("");
-        console.writeln("");
+        Console.getInstance().writeln("");
+        Console.getInstance().writeln("");
+        Console.getInstance().writeln("");
 
-        console.writeln(Colors.BLUE.get() + banner + Colors.DEFAULT.get());
+        Console.getInstance().writeln(Colors.BLUE.get() + banner + Colors.DEFAULT.get());
 
     }
 

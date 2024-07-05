@@ -1,7 +1,7 @@
 package utils.menu;
 
 import utils.Colors;
-import utils.WithConsole;
+import utils.Console;
 import utils.controllers.InRageValidator;
 import utils.controllers.IsNumberValidator;
 import utils.controllers.Validator;
@@ -9,7 +9,7 @@ import utils.controllers.Validator;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Menu extends WithConsole {
+public class Menu {
     private final List<CommandBase> commandList;
     private final String title;
 
@@ -47,8 +47,8 @@ public class Menu extends WithConsole {
         assert !commands.isEmpty();
 
         printCommands(commands);
-        console.writeln("");
-        console.writeln(title);
+        Console.getInstance().writeln("");
+        Console.getInstance().writeln(title);
 
         int optionSelected = getOptionSelected();
 
@@ -62,11 +62,11 @@ public class Menu extends WithConsole {
         Validator validator = getValidator(this.errorNonNumber, errorValidator);
         String possibleCommand;
         do{
-            possibleCommand = console.readString("-> ");
+            possibleCommand = Console.getInstance().readString("-> ");
             error = validator.validate(possibleCommand);
             if(error != null){
-                console.writeError(error);
-                console.writeln("");
+                Console.getInstance().writeError(error);
+                Console.getInstance().writeln("");
             }
         }while (error != null);
         return Integer.parseInt(possibleCommand);
@@ -77,7 +77,7 @@ public class Menu extends WithConsole {
             if(!commands.get(i).isSecret()){
                 String titleCommand = String.format("%s%d.- %s%S.%s", Colors.CYAN.get(), i+1, Colors.BLUE.get(),
                         commands.get(i).getTitle(), Colors.DEFAULT.get());
-                console.writeln(titleCommand);
+                Console.getInstance().writeln(titleCommand);
             }
         }
     }
