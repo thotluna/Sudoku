@@ -5,6 +5,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
+import org.mockito.MockedStatic;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import shared.CommandSupport;
 import utils.Console;
@@ -28,7 +30,6 @@ class StartViewTest {
     void setUp() {
         closeable = MockitoAnnotations.openMocks(this);
         view = new StartView();
-        view.setConsole(console);
     }
 
     @AfterEach
@@ -38,44 +39,56 @@ class StartViewTest {
 
     @Test
     void GiveInitialApp_WhenStartViewCalled_ThenShowStartMenu(){
-        when(console.readString("-> ")).thenReturn("1");
+        try (MockedStatic<Console> utilities = Mockito.mockStatic(Console.class)) {
+            utilities.when(Console::getInstance).thenReturn(console);
+            when(console.readString("-> ")).thenReturn("1");
 
-        view.interact(controller);
+            view.interact(controller);
 
-        verify(console).writeln(MessageRepository.getInstance().get("sudoku.start-menu"));
-        verify(console).writeln(CommandSupport.createTitleCommand(
-                MessageRepository.getInstance().get("sudoku.start-menu.new"), 1));
-        verify(console).writeln(CommandSupport.createTitleCommand(
-                MessageRepository.getInstance().get("sudoku.start-menu.load"), 2));
-        verify(console).writeln(CommandSupport.createTitleCommand(
-                MessageRepository.getInstance().get("sudoku.start-menu.cancel"), 3));
+            verify(console).writeln(MessageRepository.getInstance().get("sudoku.start-menu"));
+            verify(console).writeln(CommandSupport.createTitleCommand(
+                    MessageRepository.getInstance().get("sudoku.start-menu.new"), 1));
+            verify(console).writeln(CommandSupport.createTitleCommand(
+                    MessageRepository.getInstance().get("sudoku.start-menu.load"), 2));
+            verify(console).writeln(CommandSupport.createTitleCommand(
+                    MessageRepository.getInstance().get("sudoku.start-menu.cancel"), 3));
+        }
     }
 
     @Test
     void GiveInitialApp_WhenNewGameSelectedInStartView_ThenStartControllerNewGameAndChangeStateCalled(){
-        when(console.readString("-> ")).thenReturn("1");
+        try (MockedStatic<Console> utilities = Mockito.mockStatic(Console.class)) {
+            utilities.when(Console::getInstance).thenReturn(console);
+            when(console.readString("-> ")).thenReturn("1");
 
-        view.interact(controller);
+            view.interact(controller);
 
-        verify(controller).createNewGame();
-        verify(controller).inGameState();
+            verify(controller).createNewGame();
+            verify(controller).inGameState();
+        }
     }
 
     @Test
     void GiveInitialApp_WhenLoadGameSelectedInStartView_ThenStartControllerLoadGameCalled(){
-        when(console.readString("-> ")).thenReturn("2");
+        try (MockedStatic<Console> utilities = Mockito.mockStatic(Console.class)) {
+            utilities.when(Console::getInstance).thenReturn(console);
+            when(console.readString("-> ")).thenReturn("2");
 
-        view.interact(controller);
+            view.interact(controller);
 
-        verify(controller).loadGame();
+            verify(controller).loadGame();
+        }
     }
 
     @Test
     void GiveInitialApp_WhenExitGameSelectedInStartView_ThenStartControllerExitGameCalled(){
-        when(console.readString("-> ")).thenReturn("3");
+        try (MockedStatic<Console> utilities = Mockito.mockStatic(Console.class)) {
+            utilities.when(Console::getInstance).thenReturn(console);
+            when(console.readString("-> ")).thenReturn("3");
 
-        view.interact(controller);
+            view.interact(controller);
 
-        verify(controller).endState();
+            verify(controller).endState();
+        }
     }
 }

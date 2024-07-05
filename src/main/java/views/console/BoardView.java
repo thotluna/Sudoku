@@ -3,26 +3,26 @@ package views.console;
 import models.Board;
 import models.Cell;
 import utils.Colors;
-import utils.WithConsole;
+import utils.Console;
 
-public class BoardView extends WithConsole {
+public class BoardView {
 
     public void interact(Board boardNow) {
         Cell[][] board = boardNow.get();
         String head = Colors.BLUE.get() + "-".repeat(41) + Colors.DEFAULT.get();
 
-        console.writeln(head);
+        Console.getInstance().writeln(head);
         for (int row = 0; row < 9; row++) {
             int letterNumber = 65 + row;
             String line = String.format("%s %s",  (char) letterNumber, formatLine(board[row]));
-            console.writeln(line);
+            Console.getInstance().writeln(line);
 
             if((row + 1) % 3 == 0){
-                console.writeln(head);
+                Console.getInstance().writeln(head);
             }
         }
 
-        console.writeln("     1   2   3    4   5   6    7   8   9  ");
+        Console.getInstance().writeln("     1   2   3    4   5   6    7   8   9  ");
 
 
     }

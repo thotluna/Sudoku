@@ -4,6 +4,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
+import org.mockito.MockedStatic;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import utils.Colors;
 import utils.Console;
@@ -36,8 +38,6 @@ class MenuTest {
         this.menu = new Menu(TITLE_MENU, ERROR_NON_NUMBER, ERROR_OUT_RAGE);
         menu.addCommand(command);
         menu.addCommand(command2);
-        menu.setConsole(console);
-
     }
 
     @AfterEach
@@ -53,76 +53,94 @@ class MenuTest {
 
     @Test
     void GiveCommandsListIsNotNull_WhenMenuCalled_ThenPrintTitleConsole() {
-        when(console.readString(any())).thenReturn("1");
-        when(command.getTitle()).thenReturn(TITLE_COMMAND);
-        when(command.isActive()).thenReturn(true);
-        menu.execute();
-        verify(console, times(1)).readString(any());
-        verify(console, times(1)).writeln(TITLE_MENU);
+        try (MockedStatic<Console> utilities = Mockito.mockStatic(Console.class)) {
+            utilities.when(Console::getInstance).thenReturn(console);
+            when(console.readString(any())).thenReturn("1");
+            when(command.getTitle()).thenReturn(TITLE_COMMAND);
+            when(command.isActive()).thenReturn(true);
+            menu.execute();
+            verify(console, times(1)).readString(any());
+            verify(console, times(1)).writeln(TITLE_MENU);
+        }
     }
 
     @Test
     void GiveCommandsListIsNotNull_WhenMenuCalled_ThenPrintTitleCommand() {
-        when(console.readString(any())).thenReturn("1");
-        when(command.getTitle()).thenReturn(TITLE_COMMAND);
-        when(command.isActive()).thenReturn(true);
-        menu.execute();
-        String titleCommand = String.format("%s%d.- %s%S.%s", Colors.CYAN.get(), 1, Colors.BLUE.get(),
-                TITLE_COMMAND, Colors.DEFAULT.get());
-        verify(this.console).writeln(titleCommand);
+        try (MockedStatic<Console> utilities = Mockito.mockStatic(Console.class)) {
+            utilities.when(Console::getInstance).thenReturn(console);
+            when(console.readString(any())).thenReturn("1");
+            when(command.getTitle()).thenReturn(TITLE_COMMAND);
+            when(command.isActive()).thenReturn(true);
+            menu.execute();
+            String titleCommand = String.format("%s%d.- %s%S.%s", Colors.CYAN.get(), 1, Colors.BLUE.get(),
+                    TITLE_COMMAND, Colors.DEFAULT.get());
+            verify(this.console).writeln(titleCommand);
+        }
     }
 
     @Test
     void GiveCommandsListIsNotNull_WhenMenuCalled_ThenPrintTitleRead() {
-        when(command.getTitle()).thenReturn(TITLE_COMMAND);
-        when(command.isActive()).thenReturn(true);
-        when(this.console.readString(any())).thenReturn("1");
-        menu.execute();
-        verify(this.console).readString("-> ");
+        try (MockedStatic<Console> utilities = Mockito.mockStatic(Console.class)) {
+            utilities.when(Console::getInstance).thenReturn(console);
+            when(command.getTitle()).thenReturn(TITLE_COMMAND);
+            when(command.isActive()).thenReturn(true);
+            when(this.console.readString(any())).thenReturn("1");
+            menu.execute();
+            verify(this.console).readString("-> ");
+        }
     }
 
     @Test
     void GiveCommandsListIsNotNull_WhenMenuCalled_ThenPrintOnlyActiveCommand() {
-        when(command.getTitle()).thenReturn(TITLE_COMMAND);
-        when(command2.getTitle()).thenReturn(TITLE_COMMAND_2);
-        when(command.isActive()).thenReturn(false);
-        when(command2.isActive()).thenReturn(true);
-        when(this.console.readString(any())).thenReturn("1");
-        menu.execute();
+        try (MockedStatic<Console> utilities = Mockito.mockStatic(Console.class)) {
+            utilities.when(Console::getInstance).thenReturn(console);
+            when(command.getTitle()).thenReturn(TITLE_COMMAND);
+            when(command2.getTitle()).thenReturn(TITLE_COMMAND_2);
+            when(command.isActive()).thenReturn(false);
+            when(command2.isActive()).thenReturn(true);
+            when(this.console.readString(any())).thenReturn("1");
+            menu.execute();
 
-        String[] titlesCommand = new String[]{
-                String.format("%s%d.- %s%S.%s", Colors.CYAN.get(), 1, Colors.BLUE.get(),
-                        TITLE_COMMAND, Colors.DEFAULT.get()),
-                String.format("%s%d.- %s%S.%s", Colors.CYAN.get(), 1, Colors.BLUE.get(),
-                        TITLE_COMMAND_2, Colors.DEFAULT.get())
-        };
+            String[] titlesCommand = new String[]{
+                    String.format("%s%d.- %s%S.%s", Colors.CYAN.get(), 1, Colors.BLUE.get(),
+                            TITLE_COMMAND, Colors.DEFAULT.get()),
+                    String.format("%s%d.- %s%S.%s", Colors.CYAN.get(), 1, Colors.BLUE.get(),
+                            TITLE_COMMAND_2, Colors.DEFAULT.get())
+            };
 
 
-        verify(this.console, times(0)).writeln(titlesCommand[0]);
-        verify(this.console, times(1)).writeln(titlesCommand[1]);
+            verify(this.console, times(0)).writeln(titlesCommand[0]);
+            verify(this.console, times(1)).writeln(titlesCommand[1]);
+        }
     }
 
     @Test
     void GivenALetterAsInput_WhenIsNumberValidatorCalled_ThenPrintError() {
-        when(command.getTitle()).thenReturn(TITLE_COMMAND);
-        when(command.isActive()).thenReturn(true);
-        when(this.console.readString(any())).thenReturn("a", " ", "$", "1");
+        try (MockedStatic<Console> utilities = Mockito.mockStatic(Console.class)) {
+            utilities.when(Console::getInstance).thenReturn(console);
+            when(command.getTitle()).thenReturn(TITLE_COMMAND);
+            when(command.isActive()).thenReturn(true);
+            when(this.console.readString(any())).thenReturn("a", " ", "$", "1");
 
-        menu.execute();
+            menu.execute();
 
-        verify(this.console, times(3)).writeError(ERROR_NON_NUMBER);
+            verify(this.console, times(3)).writeError(ERROR_NON_NUMBER);
+        }
     }
 
     @Test
     void GivenAOutRageNumberAsInput_WhenIsNumberValidatorCalled_ThenPrintError() {
-        when(command.getTitle()).thenReturn(TITLE_COMMAND);
-        when(command.isActive()).thenReturn(true);
-        when(command2.getTitle()).thenReturn(TITLE_COMMAND_2);
-        when(command2.isActive()).thenReturn(false);
-        when(console.readString(any())).thenReturn("0", "2", "1");
-        menu.execute();
+        try (MockedStatic<Console> utilities = Mockito.mockStatic(Console.class)) {
+            utilities.when(Console::getInstance).thenReturn(console);
+            when(command.getTitle()).thenReturn(TITLE_COMMAND);
+            when(command.isActive()).thenReturn(true);
+            when(command2.getTitle()).thenReturn(TITLE_COMMAND_2);
+            when(command2.isActive()).thenReturn(false);
+            when(console.readString(any())).thenReturn("0", "2", "1");
+            menu.execute();
 
-        verify(this.console, times(2)).writeError(ERROR_OUT_RAGE + " 1");
+            verify(this.console, times(2)).writeError(ERROR_OUT_RAGE + " 1");
+        }
     }
 
 }

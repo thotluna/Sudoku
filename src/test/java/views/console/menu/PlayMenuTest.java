@@ -7,6 +7,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
+import org.mockito.MockedStatic;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import utils.Console;
 import utils.menu.Menu;
@@ -38,7 +40,6 @@ class PlayMenuTest {
         closeable = MockitoAnnotations.openMocks(this);
         controller = new GameController(session, saveController);
         menu = new PlayMenu(MENU_TITLE, controller);
-        menu.setConsole(console);
 
         when(saveController.hasGame()).thenReturn(true);
         when(controller.isRedoable()).thenReturn(true);
@@ -54,45 +55,56 @@ class PlayMenuTest {
 
     @Test
     void GiveAGamePlay_WhenPlayMenuExecuteCalled_thenShowTitleMenu(){
+        try (MockedStatic<Console> utilities = Mockito.mockStatic(Console.class)) {
+            utilities.when(Console::getInstance).thenReturn(console);
 
-        menu.execute();
+            menu.execute();
 
-        verify(console).writeln(MENU_TITLE);
+            verify(console).writeln(MENU_TITLE);
+        }
     }
 
     @Test
     void GiveAGamePlay_WhenPlayMenuExecuteCalled_thenShowPutTitleCommand(){
+        try (MockedStatic<Console> utilities = Mockito.mockStatic(Console.class)) {
+            utilities.when(Console::getInstance).thenReturn(console);
+            menu.execute();
 
-        menu.execute();
-
-        verify(console).writeln(createTitleCommand(MessageRepository.getInstance().get("sudoku" +
-                ".play-menu.put"), 1));
+            verify(console).writeln(createTitleCommand(MessageRepository.getInstance().get("sudoku" +
+                    ".play-menu.put"), 1));
+        }
     }
 
     @Test
     void GiveAGamePlay_WhenPlayMenuExecuteCalled_thenShowUndoTitleCommand(){
+        try (MockedStatic<Console> utilities = Mockito.mockStatic(Console.class)) {
+            utilities.when(Console::getInstance).thenReturn(console);
+            menu.execute();
 
-        menu.execute();
-
-        verify(console).writeln(createTitleCommand(MessageRepository.getInstance().get("sudoku" +
-                ".play-menu.undo"), 2));
+            verify(console).writeln(createTitleCommand(MessageRepository.getInstance().get("sudoku" +
+                    ".play-menu.undo"), 2));
+        }
     }
 
     @Test
     void GiveAGamePlay_WhenPlayMenuExecuteCalled_thenShowRedoTitleCommand(){
+        try (MockedStatic<Console> utilities = Mockito.mockStatic(Console.class)) {
+            utilities.when(Console::getInstance).thenReturn(console);
+            menu.execute();
 
-        menu.execute();
-
-        verify(console).writeln(createTitleCommand(MessageRepository.getInstance().get("sudoku" +
-                ".play-menu.redo"), 3));
+            verify(console).writeln(createTitleCommand(MessageRepository.getInstance().get("sudoku" +
+                    ".play-menu.redo"), 3));
+        }
     }
 
     @Test
     void GiveAGamePlay_WhenPlayMenuExecuteCalled_thenShowSaveTitleCommand(){
+        try (MockedStatic<Console> utilities = Mockito.mockStatic(Console.class)) {
+            utilities.when(Console::getInstance).thenReturn(console);
+            menu.execute();
 
-        menu.execute();
-
-        verify(console).writeln(createTitleCommand(MessageRepository.getInstance().get("sudoku" +
-                ".play-menu.save"), 4));
+            verify(console).writeln(createTitleCommand(MessageRepository.getInstance().get("sudoku" +
+                    ".play-menu.save"), 4));
+        }
     }
 }

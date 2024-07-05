@@ -3,11 +3,11 @@ package views.console;
 import controllers.GameController;
 import controllers.validators.PutValidatorFactory;
 import controllers.validators.PutInputValidator;
-import utils.WithConsole;
+import utils.Console;
 import utils.models.Result;
 
 
-public class PutView extends WithConsole {
+public class PutView {
 
     private final GameController controller;
 
@@ -23,14 +23,14 @@ public class PutView extends WithConsole {
         String data;
         do{
             error = false;
-            console.writeln(MessageRepository.getInstance().get("sudoku.put-view.put"));
-            data = console.readString("-> ");
+            Console.getInstance().writeln(MessageRepository.getInstance().get("sudoku.put-view.put"));
+            data = Console.getInstance().readString("-> ");
 
             Result<String, String> validate = validator.validate(data);
 
             if(validate.hasError()){
                 error = true;
-                console.writeError(validate.error());
+                Console.getInstance().writeError(validate.error());
             }
 
         }while (error);
