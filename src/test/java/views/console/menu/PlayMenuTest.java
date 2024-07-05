@@ -14,7 +14,7 @@ import views.console.MessageRepository;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static views.console.menu.CommandSupport.createTitleCommand;
+import static shared.CommandSupport.createTitleCommand;
 
 class PlayMenuTest {
 
