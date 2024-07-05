@@ -21,7 +21,11 @@ public class GameView {
             menu.execute();
         }while (controller.isNotGameOver());
 
-        new GameOverView().interact();
+        controller.resetIsComplete();
+
+        if(controller.isComplete()){
+            new GameOverView().interact();
+        }
 
         controller.nextState();
 

@@ -29,6 +29,9 @@ public class PlayMenu extends Menu {
         this.addCommand(
                 new SaveCommand(MessageRepository.getInstance().get("sudoku.play-menu.save"),
                         controller.getSaveController()));
+        this.addCommand(
+                new ExitGameCommand(MessageRepository.getInstance().get("sudoku.exit-menu.exit-game"),
+                        controller));
 
         this.addCommand(new PrintSolutionSecret("", controller));
 

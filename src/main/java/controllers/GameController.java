@@ -6,15 +6,18 @@ import models.Coordinate;
 import models.Session;
 import types.TypeCell;
 
-public class GameController implements Controller {
+public class GameController implements Controller, Ejectable {
     private final Session session;
 
     private final SaveController saveController;
     private Board board;
 
+    private Boolean finishGame;
+
     public GameController(Session session, SaveController saveController) {
         this.saveController = saveController;
         this.session = session;
+        this.finishGame = false;
     }
 
     @Override
@@ -36,7 +39,7 @@ public class GameController implements Controller {
     }
 
     public boolean isGameOver(){
-        return session.isGameComplete();
+        return session.isGameComplete() || finishGame;
     }
 
     public boolean isNotGameOver(){
@@ -82,5 +85,18 @@ public class GameController implements Controller {
 
     public void register() {
         session.register();
+    }
+
+    @Override
+    public void exit() {
+        finishGame = true;
+    }
+
+    public boolean isComplete() {
+        return session.isGameComplete();
+    }
+
+    public void resetIsComplete() {
+        finishGame = false;
     }
 }

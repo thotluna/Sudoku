@@ -2,7 +2,7 @@ package controllers;
 
 import models.Session;
 
-public class ExitController implements Controller {
+public class ExitController implements Controller, Ejectable {
     private final Session session;
 
     public ExitController(Session session) {
@@ -22,6 +22,7 @@ public class ExitController implements Controller {
         session.start();
     }
 
+    @Override
     public void exit() {
         System.exit(0);
     }
