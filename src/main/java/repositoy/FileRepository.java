@@ -1,14 +1,18 @@
 package repositoy;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import controllers.Repository;
 import dtos.GameDto;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.*;
 
 public class FileRepository implements Repository {
 
@@ -62,4 +66,53 @@ public class FileRepository implements Repository {
         }
     }
 
+
+    @Override
+    public List<String> getListFileName() {
+        Path path = Paths.get(DIRECTORY);
+        List<String> filesName = new ArrayList<>();
+        if (Files.exists(path)){
+            File directory = new File(path.toUri());
+            filesName.addAll(Arrays.stream(Objects.requireNonNull(directory.list())).toList());
+        }
+        return filesName;
+    }
+
+    @Override
+    public boolean hasFile() {
+        return !getListFileName().isEmpty();
+    }
+
+    @Override
+    public GameDto load(String fileName) {
+        String name = fileName.toLowerCase();
+        Path path = Paths.get(DIRECTORY, name);
+
+        if(!Files.exists(path)) return null;
+
+        File file = path.toFile();
+        StringBuilder data = new StringBuilder();
+        try (Scanner sc = new Scanner(file)){
+
+            while (sc.hasNext()){
+                data.append(sc.nextLine());
+            }
+
+        } catch (FileNotFoundException e) {
+            System.out.println(PREFIX_EXCEPTION + e);
+            e.printStackTrace();
+        }
+
+        ObjectMapper mapper = new ObjectMapper();
+        GameDto game = null;
+
+        try {
+            game = mapper.readValue(data.toString(), GameDto.class);
+        } catch (JsonProcessingException e) {
+            System.out.println(PREFIX_EXCEPTION + e);
+            e.printStackTrace();
+        }
+
+        return game;
+    }
 }

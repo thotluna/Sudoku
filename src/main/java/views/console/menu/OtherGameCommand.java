@@ -4,8 +4,11 @@ import controllers.ExitController;
 
 public class OtherGameCommand extends ExitCommandBase {
 
+    public final ExitController controller;
+
     protected OtherGameCommand(String title, ExitController controller) {
-        super(title, controller);
+        super(title);
+        this.controller = controller;
     }
 
     @Override

@@ -1,10 +1,13 @@
 package views.console.menu;
 
-import controllers.ExitController;
+import controllers.Ejectable;
 
 public class ExitGameCommand extends ExitCommandBase {
-    protected ExitGameCommand(String title, ExitController controller) {
-        super(title, controller);
+
+    public final Ejectable controller;
+    protected ExitGameCommand(String title, Ejectable controller) {
+        super(title);
+        this.controller = controller;
     }
 
     @Override

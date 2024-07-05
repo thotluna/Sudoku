@@ -13,15 +13,19 @@ public class GameView {
     }
 
     public void interact(GameController controller) {
-        PlayMenu menu = new PlayMenu(MessageRepository.getInstance().get("sudoku.start-menu"), controller);
         do{
+            PlayMenu menu = new PlayMenu(MessageRepository.getInstance().get("sudoku.start-menu"), controller);
             Board board = controller.getBoard();
             boardView.interact(board);
 
             menu.execute();
         }while (controller.isNotGameOver());
 
-        new GameOverView().interact();
+        controller.resetIsComplete();
+
+        if(controller.isComplete()){
+            new GameOverView().interact();
+        }
 
         controller.nextState();
 

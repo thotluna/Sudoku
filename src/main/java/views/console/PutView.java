@@ -36,6 +36,7 @@ public class PutView extends WithConsole {
         }while (error);
 
         controller.addCell(data);
+        controller.register();
 
     }
 }
