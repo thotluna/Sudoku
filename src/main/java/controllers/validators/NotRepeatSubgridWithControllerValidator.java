@@ -1,4 +1,4 @@
-package controllers.validators.put;
+package controllers.validators;
 
 import controllers.GameController;
 import models.Board;
@@ -13,6 +13,10 @@ public class NotRepeatSubgridWithControllerValidator extends InputPutValidator {
 
     @Override
     protected Result<String, String> specificallyValidate(String validatable) {
+        if(validatable.length() <= 3 || !validatable.contains(":")){
+            return new Result<>(null, null);
+        }
+
         String[] separate = validatable.split(":");
         Coordinate coordinate = new Coordinate(separate[0]);
 

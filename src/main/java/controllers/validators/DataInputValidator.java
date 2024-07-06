@@ -2,15 +2,15 @@ package controllers.validators;
 
 import utils.models.Result;
 
-public abstract class PutInputValidator {
+public abstract class DataInputValidator {
 
-    protected final PutInputValidator next;
+    protected final DataInputValidator next;
 
-    protected PutInputValidator() {
+    protected DataInputValidator() {
         this.next = null;
     }
 
-    protected PutInputValidator(PutInputValidator next) {
+    protected DataInputValidator(DataInputValidator next) {
         this.next = next;
     }
 

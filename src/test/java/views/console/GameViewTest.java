@@ -48,20 +48,24 @@ class GameViewTest {
             when(controller.getBoard()).thenReturn(getBoardSet().initial());
             when(controller.getSaveController()).thenReturn(saveController);
             when(saveController.hasGame()).thenReturn(true);
-            when(console.readString("-> ")).thenReturn("2");
+            when(console.readString("-> ")).thenReturn("3");
 
             view.interact(controller);
 
+            String[] titles = new String[]{
+                    MessageRepository.getInstance().get("sudoku.play-menu.put"),
+                    MessageRepository.getInstance().get("sudoku.play-menu.highlight"),
+                    MessageRepository.getInstance().get("sudoku.play-menu.save"),
+                    MessageRepository.getInstance().get("sudoku.exit-menu.exit-game")
+            };
+
             verify(console).writeln(MessageRepository.getInstance().get("sudoku.start-menu"));
-            verify(console).writeln(
-                    CommandSupport.createTitleCommand(
-                            MessageRepository.getInstance().get("sudoku.play-menu.put"), 1));
-            verify(console).writeln(
-                    CommandSupport.createTitleCommand(
-                            MessageRepository.getInstance().get("sudoku.play-menu.save"), 2));
-            verify(console).writeln(
-                    CommandSupport.createTitleCommand(
-                            MessageRepository.getInstance().get("sudoku.exit-menu.exit-game"), 3));
+
+            for (int i = 0; i< titles.length; i++) {
+                verify(console).writeln(
+                        CommandSupport.createTitleCommand(titles[i], i + 1));
+            }
+
         }
     }
 
@@ -74,26 +78,25 @@ class GameViewTest {
             when(controller.isRedoable()).thenReturn(true);
             when(controller.getSaveController()).thenReturn(saveController);
             when(saveController.hasGame()).thenReturn(true);
-            when(console.readString("-> ")).thenReturn("2");
+            when(console.readString("-> ")).thenReturn("3");
 
             view.interact(controller);
 
+            String[] titles = new String[]{
+                    MessageRepository.getInstance().get("sudoku.play-menu.put"),
+                    MessageRepository.getInstance().get("sudoku.play-menu.highlight"),
+                    MessageRepository.getInstance().get("sudoku.play-menu.undo"),
+                    MessageRepository.getInstance().get("sudoku.play-menu.redo"),
+                    MessageRepository.getInstance().get("sudoku.play-menu.save"),
+                    MessageRepository.getInstance().get("sudoku.exit-menu.exit-game")
+            };
+
             verify(console).writeln(MessageRepository.getInstance().get("sudoku.start-menu"));
-            verify(console).writeln(
-                    CommandSupport.createTitleCommand(
-                            MessageRepository.getInstance().get("sudoku.play-menu.put"), 1));
-            verify(console).writeln(
-                    CommandSupport.createTitleCommand(
-                            MessageRepository.getInstance().get("sudoku.play-menu.undo"), 2));
-            verify(console).writeln(
-                    CommandSupport.createTitleCommand(
-                            MessageRepository.getInstance().get("sudoku.play-menu.redo"), 3));
-            verify(console).writeln(
-                    CommandSupport.createTitleCommand(
-                            MessageRepository.getInstance().get("sudoku.play-menu.save"), 4));
-            verify(console).writeln(
-                    CommandSupport.createTitleCommand(
-                            MessageRepository.getInstance().get("sudoku.exit-menu.exit-game"), 5));
+
+            for (int i = 0; i< titles.length; i++) {
+                verify(console).writeln(
+                        CommandSupport.createTitleCommand(titles[i], i + 1));
+            }
         }
     }
 
@@ -106,7 +109,7 @@ class GameViewTest {
             when(saveController.hasGame()).thenReturn(true);
             when(controller.isNotGameOver()).thenReturn(true, false);
 
-            when(console.readString("-> ")).thenReturn("2");
+            when(console.readString("-> ")).thenReturn("3");
 
             view.interact(controller);
 

@@ -53,8 +53,26 @@ public class GameController implements Controller, Ejectable {
 
     public void addCell(String data) {
         Coordinate coordinate = new Coordinate(data.split(":")[0]);
-        int value  = Integer.parseInt(data.split(":")[1]);
-        session.addCell(new Cell(coordinate, value , TypeCell.CANDIDATE));
+        String valueType = data.contains(":")
+                ? data.split(":")[1]
+                : null;
+        int value = data.contains(":") && data.length() > 3
+                ? Integer.parseInt(String.valueOf(data.charAt(3)))
+                : 0;
+
+        TypeCell type;
+
+        if (data.contains(":")){
+            if (valueType != null && valueType.length() == 2)
+                type = valueType.charAt(1) == 'h' ? TypeCell.HIGHLIGHT : TypeCell.CANDIDATE;
+            else type = TypeCell.CANDIDATE;
+        }else{
+            type = data.length() == 3 && data.charAt(2) == 'h'
+                    ? TypeCell.HIGHLIGHT
+                    : TypeCell.CANDIDATE;
+        }
+
+        session.addCell(new Cell(coordinate, value , type));
 
     }
 
