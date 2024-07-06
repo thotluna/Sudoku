@@ -7,7 +7,10 @@ import utils.Console;
 
 public class BoardView {
 
-    public void interact(Board boardNow) {
+    public void interact(Board boardNow, int helpAvailable) {
+
+        Console.getInstance().writeln(Colors.YELLOW.get() + "HELP: " + helpAvailable + Colors.DEFAULT.get());
+
         Cell[][] board = boardNow.get();
         String head = Colors.BLUE.get() + "-".repeat(41) + Colors.DEFAULT.get();
 

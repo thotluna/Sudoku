@@ -6,7 +6,11 @@ import views.console.MessageRepository;
 
 public class AvailableCoordinateValidator extends InputPutValidator {
 
-    public AvailableCoordinateValidator( GameController controller, DataInputValidator next) {
+    public AvailableCoordinateValidator(GameController controller) {
+        super(controller);
+    }
+
+    public AvailableCoordinateValidator(GameController controller, DataInputValidator next) {
         super( controller, next);
     }
 

@@ -1,9 +1,13 @@
 package models;
 
+import types.TypeCell;
+
 public class Game {
     private Board initial;
     private Board solution;
     private Board board;
+
+    private int helpAvailable;
 
     public Game() {
         this.start();
@@ -13,17 +17,20 @@ public class Game {
         this.initial = initial;
         this.solution = solution;
         this.board = board;
+        helpAvailable = 3;
     }
 
     public void start(){
         solution = new Board();
         initial = new Board();
         board = new Board();
+        helpAvailable = 3;
     }
 
     public void restart() {
         assert !initial.isEmptyComplete();
         board = initial.newCopy();
+        helpAvailable = 3;
     }
 
     public void addCells(Board initialBoard) {
@@ -61,6 +68,7 @@ public class Game {
     }
 
     public void addCell(Cell cell){
+        verifyClean(cell.coordinate(), cell.value());
         board.addCell(cell);
     }
 
@@ -80,5 +88,35 @@ public class Game {
         initial = game.initial.newCopy();
         solution = game.solution.newCopy();
         board = game.board.newCopy();
+    }
+
+    public void helpCell(Coordinate coordinate) {
+        Cell cell = solution.getCell(coordinate);
+        if(cell.type() != TypeCell.FIXED){
+            board.addCell(new Cell(cell.coordinate(), cell.value(), TypeCell.HELP));
+            helpAvailable--;
+            verifyRepeat(cell.coordinate(),cell.value());
+        }
+    }
+
+    private void verifyRepeat(Coordinate coordinate, int value) {
+        for (Cell cell: board.getCellsError(coordinate, value)) {
+            board.addCell(new Cell(cell.coordinate(), cell.value(), TypeCell.ERROR));
+        }
+    }
+
+    private void verifyClean(Coordinate coordinate, int value) {
+
+        for (Cell cell: board.verifyClean(coordinate, value)) {
+            board.addCell(new Cell(cell.coordinate(), cell.value(), TypeCell.CANDIDATE));
+        }
+    }
+
+    public boolean hasHelp() {
+        return helpAvailable > 0;
+    }
+
+    public int getHelpAvailable() {
+        return helpAvailable;
     }
 }

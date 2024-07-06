@@ -117,4 +117,17 @@ public class GameController implements Controller, Ejectable {
     public void resetIsComplete() {
         finishGame = false;
     }
+
+    public void helpCell(String data) {
+        Coordinate coordinate = new Coordinate(data);
+        session.helpCell(coordinate);
+    }
+
+    public boolean hasHelp() {
+        return session.hasHelp();
+    }
+
+    public int getHelpAvailable() {
+        return session.getHelpAvailable();
+    }
 }

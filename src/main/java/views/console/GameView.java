@@ -1,7 +1,6 @@
 package views.console;
 
 import controllers.GameController;
-import models.Board;
 import views.console.menu.PlayMenu;
 
 public class GameView {
@@ -15,8 +14,7 @@ public class GameView {
     public void interact(GameController controller) {
         do{
             PlayMenu menu = new PlayMenu(MessageRepository.getInstance().get("sudoku.start-menu"), controller);
-            Board board = controller.getBoard();
-            boardView.interact(board);
+            boardView.interact(controller.getBoard(), controller.getHelpAvailable());
 
             menu.execute();
         }while (controller.isNotGameOver());
