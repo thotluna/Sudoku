@@ -11,7 +11,7 @@ public class PrintSolutionSecret extends PlayCommandBase {
 
     @Override
     public void execute() {
-        new BoardView().interact(controller.getSolution());
+        new BoardView().interact(controller.getSolution(), controller.getHelpAvailable());
     }
 
     @Override

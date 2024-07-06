@@ -100,4 +100,16 @@ public class Session {
     public void register() {
         register.register();
     }
+
+    public void helpCell(Coordinate coordinate) {
+        game.helpCell(coordinate);
+    }
+
+    public boolean hasHelp() {
+        return game.hasHelp();
+    }
+
+    public int getHelpAvailable() {
+        return game.getHelpAvailable();
+    }
 }

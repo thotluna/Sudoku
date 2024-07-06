@@ -5,12 +5,15 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import types.TypeCell;
 
+import java.util.List;
+
 import static shared.BoardSupport.getBoardComplete;
 import static models.IsBoardMatcher.isEmptyBoard;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static shared.BoardSupport.getBoardSet;
 
 class BoardTest {
 
@@ -191,6 +194,47 @@ class BoardTest {
     void GiveBoardEmpty_WhenIsEmptyCompleteCalled_ThenReturnTrue(){
 
         assertThat(board.isEmptyComplete(), is(true));
+    }
+
+    @Test
+    void GiveABoardNotEmpty_WhenGetCellsErrorCalledExistInRowColumnAndSubgrid_ThenReturnListCell(){
+        Board board = getBoardSet().initial();
+
+        List<Cell> cells = board.getCellsError(new Coordinate("B2"), 4);
+
+        assertThat(cells.size(), is(3));
+    }
+
+    @Test
+    void GiveABoardNotEmpty_WhenGetCellsErrorCalled_ThenReturnListCellEmpty(){
+        Board board = getBoardSet().initial();
+
+        List<Cell> cells = board.getCellsError(new Coordinate("A1"), 1);
+
+        assertThat(cells.size(), is(0));
+    }
+
+    @Test
+    void GiveABoardNotEmpty_WhenVerifyCleanCalledAndExistRowColumnAndSubgrid_ThenReturnListCell(){
+        Board board = getBoardSet().initial();
+        board.addCell(Cell.newCellCandidate(0, 3, 1, TypeCell.ERROR));
+        board.addCell(Cell.newCellCandidate(4, 0, 1, TypeCell.ERROR));
+        board.addCell(Cell.newCellCandidate(2, 1, 1, TypeCell.ERROR));
+
+        List<Cell> cells = board.getCellsError(new Coordinate("B1"), 1);
+
+        assertThat(cells.size(), is(3));
+
+    }
+
+    @Test
+    void GiveABoardNotEmpty_WhenVerifyCleanCalled_ThenReturnListCellEmpty(){
+        Board board = getBoardSet().initial();
+
+        List<Cell> cells = board.getCellsError(new Coordinate("A1"), 9);
+
+        assertThat(cells.size(), is(0));
+
     }
 
 

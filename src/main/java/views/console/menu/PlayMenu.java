@@ -15,6 +15,15 @@ public class PlayMenu extends Menu {
                 new PutCommand(
                         MessageRepository.getInstance().get("sudoku.play-menu.put")
                         , controller ));
+        this.addCommand(
+                new HighlightCommand(
+                        MessageRepository.getInstance().get("sudoku.play-menu.highlight")
+                        , controller ));
+
+        this.addCommand(
+                new HelpCommand(
+                        MessageRepository.getInstance().get("sudoku.play-menu.help")
+                        , controller ));
 
         this.addCommand(
                 new UndoCommand(

@@ -45,7 +45,7 @@ class PlayMenuTest {
         when(controller.isRedoable()).thenReturn(true);
         when(controller.isUndoable()).thenReturn(true);
 
-        when(console.readString("-> ")).thenReturn("2");
+        when(console.readString("-> ")).thenReturn("3");
     }
 
     @AfterEach
@@ -75,6 +75,7 @@ class PlayMenuTest {
         }
     }
 
+
     @Test
     void GiveAGamePlay_WhenPlayMenuExecuteCalled_thenShowUndoTitleCommand(){
         try (MockedStatic<Console> utilities = Mockito.mockStatic(Console.class)) {
@@ -82,7 +83,7 @@ class PlayMenuTest {
             menu.execute();
 
             verify(console).writeln(createTitleCommand(MessageRepository.getInstance().get("sudoku" +
-                    ".play-menu.undo"), 2));
+                    ".play-menu.undo"), 3));
         }
     }
 
@@ -93,7 +94,7 @@ class PlayMenuTest {
             menu.execute();
 
             verify(console).writeln(createTitleCommand(MessageRepository.getInstance().get("sudoku" +
-                    ".play-menu.redo"), 3));
+                    ".play-menu.redo"), 4));
         }
     }
 
@@ -104,7 +105,7 @@ class PlayMenuTest {
             menu.execute();
 
             verify(console).writeln(createTitleCommand(MessageRepository.getInstance().get("sudoku" +
-                    ".play-menu.save"), 4));
+                    ".play-menu.save"), 5));
         }
     }
 }

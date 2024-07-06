@@ -18,6 +18,10 @@ public record Cell(Coordinate coordinate, int value, TypeCell type) {
         return new Cell(new Coordinate(row, column), value, TypeCell.CANDIDATE);
     }
 
+    public static Cell newCellCandidate(int row, int column, int value, TypeCell type){
+        return new Cell(new Coordinate(row, column), value, type);
+    }
+
     public static Cell nullCell(Coordinate coordinate) {
         return nullCell(coordinate.getRow(), coordinate.getColumn());
     }

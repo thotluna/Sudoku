@@ -1,12 +1,11 @@
-package controllers.validators.put;
+package controllers.validators;
 
-import controllers.validators.PutInputValidator;
 import utils.models.Result;
 import views.console.MessageRepository;
 
-public class RowFormatValidator extends PutInputValidator {
+public class RowFormatValidator extends DataInputValidator {
 
-    public RowFormatValidator(PutInputValidator next) {
+    public RowFormatValidator(DataInputValidator next) {
         super(next);
     }
 

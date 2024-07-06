@@ -3,7 +3,9 @@ package models;
 import types.TypeCell;
 import utils.models.Interval;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 public class Board {
@@ -205,5 +207,66 @@ public class Board {
 
     public int getDimension() {
         return dimension;
+    }
+
+    public Cell getCellWithValueInRow(int value, int row) {
+        for (Cell cell : board[row]) {
+            if(cell.value() == value){
+                return cell;
+            }
+        }
+        return null;
+    }
+
+    public Cell getCellWithValueInColumn(int value, int column) {
+        for (int row = 0; row < dimension; row++) {
+            Cell cell = board[row][column];
+            if (cell.value() == value){
+                return cell;
+            }
+        }
+        return null;
+    }
+
+    public Cell getCellWithValueInSubgrid(int value, Coordinate coordinate) {
+        int max = (int) (Math.sqrt(dimension));
+        int rowSubgrid = (coordinate.getRow() / max) * max;
+        int columnSubgrid = (coordinate.getColumn() /max) * max;
+
+        for (int row = rowSubgrid; row < rowSubgrid + max; row++) {
+            for (int column = columnSubgrid; column < columnSubgrid + max; column++) {
+                if(board[row][column].value() == value){
+                    return board[row][column];
+                }
+            }
+        }
+
+        return null;
+    }
+
+    public List<Cell> getCellsError(Coordinate coordinate, int value) {
+        List<Cell> cells = new ArrayList<>();
+        if(hasValueInRow(value, coordinate.getRow())){
+            cells.add(getCellWithValueInRow(value, coordinate.getRow()));
+        }
+
+
+        if(hasValueInColumn(value, coordinate.getRow())){
+            cells.add(getCellWithValueInColumn(value, coordinate.getColumn()));
+        }
+        if(hasValueInSubstring(value, coordinate)){
+            cells.add( getCellWithValueInSubgrid(value, coordinate));
+        }
+
+        return cells;
+
+
+    }
+
+    public List<Cell> verifyClean(Coordinate coordinate, int value) {
+        Cell old = getCell(coordinate);
+        if(old.value() == value) return new ArrayList<>();
+
+        return getCellsError(old.coordinate(), old.value());
     }
 }

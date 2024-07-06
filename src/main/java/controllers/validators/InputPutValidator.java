@@ -1,9 +1,8 @@
-package controllers.validators.put;
+package controllers.validators;
 
 import controllers.GameController;
-import controllers.validators.PutInputValidator;
 
-public abstract class InputPutValidator extends PutInputValidator {
+public abstract class InputPutValidator extends DataInputValidator {
 
     protected final GameController controller;
 
@@ -11,7 +10,7 @@ public abstract class InputPutValidator extends PutInputValidator {
         this.controller = controller;
     }
 
-    protected InputPutValidator(GameController controller, PutInputValidator next) {
+    protected InputPutValidator(GameController controller, DataInputValidator next) {
         super(next);
         this.controller = controller;
     }

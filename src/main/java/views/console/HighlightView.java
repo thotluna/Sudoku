@@ -1,29 +1,28 @@
 package views.console;
 
 import controllers.GameController;
-import controllers.validators.DataInputValidatorFactory;
 import controllers.validators.DataInputValidator;
+import controllers.validators.DataInputValidatorFactory;
 import utils.Console;
 import utils.models.Result;
 
-
-public class PutView {
+public class HighlightView {
 
     private final GameController controller;
-
     private final DataInputValidator validator;
 
-    public PutView(GameController controller) {
+    public HighlightView(GameController controller) {
         this.controller = controller;
         validator = new DataInputValidatorFactory(controller).getValidator();
     }
 
-    public void interact(){
+
+    public void interact() {
         boolean error;
         String data;
         do{
             error = false;
-            Console.getInstance().writeln(MessageRepository.getInstance().get("sudoku.put-view.put"));
+            Console.getInstance().writeln(MessageRepository.getInstance().get("sudoku.highlight-view.highlight"));
             data = Console.getInstance().readString("-> ");
 
             Result<String, String> validate = validator.validate(data);
@@ -35,8 +34,9 @@ public class PutView {
 
         }while (error);
 
-        controller.addCell(data);
+        controller.addCell(data + "h");
         controller.register();
+
 
     }
 }

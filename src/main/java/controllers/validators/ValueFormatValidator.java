@@ -1,26 +1,28 @@
-package controllers.validators.put;
+package controllers.validators;
 
-import controllers.validators.PutInputValidator;
 import utils.models.Result;
 import views.console.MessageRepository;
 
-public class ColumnFormatValidator extends PutInputValidator {
+public class ValueFormatValidator extends DataInputValidator {
 
     private static final String ERROR = String.format("%s %s",
             MessageRepository.getInstance().get("sudoku.put-view.put.error"),
-                        MessageRepository.getInstance().get("sudoku.put-view.put.error-coordinate"));
+            MessageRepository.getInstance().get("sudoku.put-view.put.error-value"));
 
-    public ColumnFormatValidator(PutInputValidator next) {
+    public ValueFormatValidator(DataInputValidator next) {
         super(next);
     }
 
     @Override
     protected Result<String, String> specificallyValidate(String validatable) {
-        String column = String.valueOf(validatable.charAt(1));
+        if(validatable.length() <= 3 || !validatable.contains(":")){
+            return new Result<>(null, null);
+        }
+        String valueString = String.valueOf(validatable.charAt(3));
 
         try{
-            int number = Integer.parseInt(column);
-            if(number < 1 || number > 9){
+            int value = Integer.parseInt(valueString);
+            if(value < 1 || value > 9){
                 return  new Result<>(ERROR, null);
             }
         }catch (NumberFormatException e){
