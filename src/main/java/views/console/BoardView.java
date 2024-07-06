@@ -56,6 +56,7 @@ public class BoardView {
                     .append(" ")
                     .append(Colors.DEFAULT.get());
             case HIGHLIGHT -> cellValue.append(Colors.BLUE_BACKGROUND.get())
+                    .append(Colors.BLACK.get())
                     .append(" ")
                     .append(cell.value())
                     .append(" ")
