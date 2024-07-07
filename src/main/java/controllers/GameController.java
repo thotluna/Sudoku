@@ -10,7 +10,6 @@ public class GameController implements Controller, Ejectable {
     private final Session session;
 
     private final SaveController saveController;
-    private Board board;
 
     private Boolean finishGame;
 
@@ -29,13 +28,9 @@ public class GameController implements Controller, Ejectable {
         session.nextState();
     }
 
-    public void loadBoard() {
-        this.board = session.getBoard();
-    }
 
     public Board getBoard() {
-
-        return board;
+        return session.getBoard();
     }
 
     public boolean isGameOver(){
@@ -48,7 +43,7 @@ public class GameController implements Controller, Ejectable {
 
 
     public boolean isValidCell(String coordinate) {
-        return !board.isBusyCell(coordinate);
+        return !session.isCellBusy(coordinate);
     }
 
     public void addCell(String data) {

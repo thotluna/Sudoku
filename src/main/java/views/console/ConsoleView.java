@@ -32,7 +32,6 @@ public class ConsoleView implements PrintScreen {
 
     @Override
     public void visit(GameController controller) {
-        controller.loadBoard();
         this.gameView.interact(controller);
     }
 

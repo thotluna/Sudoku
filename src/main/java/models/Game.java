@@ -119,4 +119,8 @@ public class Game {
     public int getHelpAvailable() {
         return helpAvailable;
     }
+
+    public boolean isCellBusy(String coordinate) {
+        return board.isBusyCell(coordinate);
+    }
 }

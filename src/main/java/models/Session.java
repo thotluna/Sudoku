@@ -116,4 +116,8 @@ public class Session {
     public Cell getCell(Coordinate coordinate) {
         return game.getCell(coordinate.getRow(), coordinate.getColumn());
     }
+
+    public boolean isCellBusy(String coordinate) {
+        return game.isCellBusy(coordinate);
+    }
 }
