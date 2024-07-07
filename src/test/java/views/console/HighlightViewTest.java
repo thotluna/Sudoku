@@ -88,13 +88,12 @@ class HighlightViewTest {
     void GiveShowASkData_WhenInputValueValid_ThenNotPrinterErrorValue(){
         try (MockedStatic<Console> utilities = Mockito.mockStatic(Console.class)) {
             utilities.when(Console::getInstance).thenReturn(console);
-            when(console.readString("-> ")).thenReturn("A1", "A1h", DATA);
+            when(console.readString("-> ")).thenReturn("a1", "a1+", "a1:1", "a1/1", DATA);
 
             view.interact();
 
-            String error = String.format("%s %s",
-                    MessageRepository.getInstance().get("sudoku.put-view.put.error"),
-                    MessageRepository.getInstance().get("sudoku.put-view.put.error-value"));
+            String error = MessageRepository.getInstance().get("sudoku.put-view.put.error");
+
 
             verify(console, times(0)).writeError(error);
         }

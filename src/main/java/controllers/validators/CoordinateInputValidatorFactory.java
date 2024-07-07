@@ -8,9 +8,7 @@ public class CoordinateInputValidatorFactory {
     public CoordinateInputValidatorFactory(GameController controller) {
 
         DataInputValidator availableCoordinateValidator = new AvailableCoordinateValidator( controller);
-        DataInputValidator columnFormatValidator = new ColumnFormatValidator(availableCoordinateValidator);
-        DataInputValidator rowFormatValidator = new RowFormatValidator(columnFormatValidator);
-        validator = new FormatStringValidator(rowFormatValidator);
+        validator = new FormatStringValidator(availableCoordinateValidator);
 
     }
 

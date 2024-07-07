@@ -11,10 +11,7 @@ public class DataInputValidatorFactory {
         DataInputValidator notRepeatColumnValidator = new NotRepeatInColumnWithControllerValidator(controller, notRepeatSubgridValidator);
         DataInputValidator notRepeatRowValidator = new NotRepeatInRowWithControllerValidator(controller, notRepeatColumnValidator);
         DataInputValidator availableCoordinateValidator = new AvailableCoordinateValidator( controller, notRepeatRowValidator);
-        DataInputValidator valueFormatValidator = new ValueFormatValidator(availableCoordinateValidator);
-        DataInputValidator columnFormatValidator = new ColumnFormatValidator(valueFormatValidator);
-        DataInputValidator rowFormatValidator = new RowFormatValidator(columnFormatValidator);
-        validator = new FormatStringValidator(rowFormatValidator);
+        validator = new FormatStringValidator(availableCoordinateValidator);
 
     }
 
