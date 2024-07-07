@@ -5,6 +5,9 @@ import views.console.MessageRepository;
 
 public class FormatStringValidator extends DataInputValidator {
 
+    public FormatStringValidator() {
+    }
+
     public FormatStringValidator(DataInputValidator next) {
         super(next);
     }
