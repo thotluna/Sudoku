@@ -81,7 +81,7 @@ public class Game {
     }
 
     public Cell getCell(int row, int column) {
-        return board.getCell(row, column);
+        return  board.getCell(row, column);
     }
 
     public void load(Game game) {

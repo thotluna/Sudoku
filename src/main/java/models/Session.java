@@ -112,4 +112,8 @@ public class Session {
     public int getHelpAvailable() {
         return game.getHelpAvailable();
     }
+
+    public Cell getCell(Coordinate coordinate) {
+        return game.getCell(coordinate.getRow(), coordinate.getColumn());
+    }
 }

@@ -33,6 +33,7 @@ class GameViewTest {
     @BeforeEach
     void setUp() {
         closeable = MockitoAnnotations.openMocks(this);
+
         view = new GameView();
     }
 
@@ -48,7 +49,7 @@ class GameViewTest {
             when(controller.getBoard()).thenReturn(getBoardSet().initial());
             when(controller.getSaveController()).thenReturn(saveController);
             when(saveController.hasGame()).thenReturn(true);
-            when(console.readString("-> ")).thenReturn("3");
+            when(console.readString("-> ")).thenReturn("--", "3");
 
             view.interact(controller);
 
@@ -78,7 +79,7 @@ class GameViewTest {
             when(controller.isRedoable()).thenReturn(true);
             when(controller.getSaveController()).thenReturn(saveController);
             when(saveController.hasGame()).thenReturn(true);
-            when(console.readString("-> ")).thenReturn("3");
+            when(console.readString("-> ")).thenReturn("--","3");
 
             view.interact(controller);
 
@@ -109,13 +110,108 @@ class GameViewTest {
             when(saveController.hasGame()).thenReturn(true);
             when(controller.isNotGameOver()).thenReturn(true, false);
 
-            when(console.readString("-> ")).thenReturn("3");
+            when(console.readString("-> ")).thenReturn("--","3", "--","3");
 
             view.interact(controller);
 
             verify(console, times(2)).writeln(MessageRepository.getInstance().get("sudoku.start-menu"));
         }
 
+    }
+
+    @Test
+    void GiveInGame_WhenInputDirectData_ThenAddCell(){
+        try (MockedStatic<Console> utilities = Mockito.mockStatic(Console.class)) {
+            utilities.when(Console::getInstance).thenReturn(console);
+            when(controller.getBoard()).thenReturn(getBoardSet().initial());
+            when(controller.getSaveController()).thenReturn(saveController);
+            when(saveController.hasGame()).thenReturn(true);
+            when(controller.isValidCell(any())).thenReturn(true);
+            when(controller.isNotGameOver()).thenReturn(true, false);
+
+            when(console.readString("-> ")).thenReturn("A1/1", "A1:1", "--","3");
+
+            view.interact(controller);
+
+            verify(controller).addCell("A1:1");
+        }
+    }
+
+    @Test
+    void GiveInGame_WhenInputDirectDataHighlight_ThenAddHighlightCell(){
+        try (MockedStatic<Console> utilities = Mockito.mockStatic(Console.class)) {
+            utilities.when(Console::getInstance).thenReturn(console);
+            when(controller.getBoard()).thenReturn(getBoardSet().initial());
+            when(controller.getSaveController()).thenReturn(saveController);
+            when(saveController.hasGame()).thenReturn(true);
+            when(controller.isValidCell(any())).thenReturn(true);
+            when(controller.isNotGameOver()).thenReturn(true, false);
+
+            when(console.readString("-> ")).thenReturn("A1/1+", "A1+", "--","3");
+
+            view.interact(controller);
+
+            verify(controller, times(1)).addCellHighlight("A1/1+");
+            verify(controller, times(1)).addCellHighlight("A1+");
+        }
+    }
+
+    @Test
+    void GiveInGame_WhenInputDirectDataHelp_ThenAddHelpCell(){
+        try (MockedStatic<Console> utilities = Mockito.mockStatic(Console.class)) {
+            utilities.when(Console::getInstance).thenReturn(console);
+            when(controller.getBoard()).thenReturn(getBoardSet().initial());
+            when(controller.getSaveController()).thenReturn(saveController);
+            when(saveController.hasGame()).thenReturn(true);
+            when(controller.isValidCell(any())).thenReturn(true);
+            when(controller.isNotGameOver()).thenReturn(true, false);
+
+            when(console.readString("-> ")).thenReturn("A1.", "--","3");
+
+            view.interact(controller);
+
+            verify(controller, times(1)).helpCell("A1.");
+        }
+    }
+
+    @Test
+    void GiveInGame_WhenInputDeleteData_ThenDeleteCell(){
+        try (MockedStatic<Console> utilities = Mockito.mockStatic(Console.class)) {
+            utilities.when(Console::getInstance).thenReturn(console);
+            when(controller.getBoard()).thenReturn(getBoardSet().initial());
+            when(controller.getSaveController()).thenReturn(saveController);
+            when(saveController.hasGame()).thenReturn(true);
+            when(controller.isValidCell(any())).thenReturn(true);
+            when(controller.isNotGameOver()).thenReturn(true, false);
+
+            when(console.readString("-> ")).thenReturn("A1-", "--","3");
+
+            view.interact(controller);
+
+            verify(controller, times(1)).deleteCell("A1-");
+        }
+    }
+
+    @Test
+    void GiveInGame_WhenInputFailFormat_ThenShowErrorFormat(){
+        try (MockedStatic<Console> utilities = Mockito.mockStatic(Console.class)) {
+            utilities.when(Console::getInstance).thenReturn(console);
+            when(controller.getBoard()).thenReturn(getBoardSet().initial());
+            when(controller.getSaveController()).thenReturn(saveController);
+            when(saveController.hasGame()).thenReturn(true);
+            when(controller.isValidCell(any())).thenReturn(true);
+            when(controller.isNotGameOver()).thenReturn(true, true, true, true, true, true,  false);
+
+            when(console.readString("-> ")).thenReturn("A", "11", "a-", "a.", "a-", "a+", "--","3");
+
+            view.interact(controller);
+
+            verify(console, times(6)).writeError(MessageRepository.getInstance().get("sudoku.put-view.put.error"));
+
+            verify(controller, times(0)).addCell((String) any());
+            verify(controller, times(0)).addCellHighlight( any());
+            verify(controller, times(0)).helpCell( any());
+        }
     }
 
 }

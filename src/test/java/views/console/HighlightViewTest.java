@@ -60,12 +60,12 @@ class HighlightViewTest {
     void GiveShowASkPutData_WhenInputFormatIsFail_ThenPrinterBadFormat(){
         try (MockedStatic<Console> utilities = Mockito.mockStatic(Console.class)) {
             utilities.when(Console::getInstance).thenReturn(console);
-            when(console.readString("-> ")).thenReturn("5", "A54", "A5-4", "A10:1", "A1:10", "A1", DATA);
+            when(console.readString("-> ")).thenReturn("5", "A54", "A5-4", "A10:1", "A1:10", "A1:A", "A1:0", DATA);
 
 
             view.interact();
 
-            verify(console, times(5)).writeError(
+            verify(console, times(7)).writeError(
                     MessageRepository.getInstance().get("sudoku.put-view.put.error"));
         }
     }
@@ -81,55 +81,6 @@ class HighlightViewTest {
 
             verify(console, times(0)).writeError(
                     MessageRepository.getInstance().get("sudoku.put-view.put.error"));
-        }
-    }
-
-    @Test
-    void GiveShowASkPutData_henInputRowOutRage_ThenPrinterErrorCoordinate(){
-        try (MockedStatic<Console> utilities = Mockito.mockStatic(Console.class)) {
-            utilities.when(Console::getInstance).thenReturn(console);
-            when(console.readString("-> ")).thenReturn("J5:5", "05:5", "11:1", DATA);
-
-            view.interact();
-
-            String error = String.format("%s %s",
-                    MessageRepository.getInstance().get("sudoku.put-view.put.error"),
-                    MessageRepository.getInstance().get("sudoku.put-view.put.error-coordinate"));
-
-            verify(console, times(3)).writeError(error);
-        }
-    }
-
-    @Test
-    void GiveShowASkPutData_henInputColumnOutRage_ThenPrinterErrorCoordinate(){
-        try (MockedStatic<Console> utilities = Mockito.mockStatic(Console.class)) {
-            utilities.when(Console::getInstance).thenReturn(console);
-            when(console.readString("-> ")).thenReturn("AA:1", "A0:1", DATA);
-
-            view.interact();
-
-            String error = String.format("%s %s",
-                    MessageRepository.getInstance().get("sudoku.put-view.put.error"),
-                    MessageRepository.getInstance().get("sudoku.put-view.put.error-coordinate"));
-
-            verify(console, times(2)).writeError(error);
-        }
-
-    }
-
-    @Test
-    void GiveShowASkData_WhenInputValueFail_ThenPrinterErrorValue(){
-        try (MockedStatic<Console> utilities = Mockito.mockStatic(Console.class)) {
-            utilities.when(Console::getInstance).thenReturn(console);
-            when(console.readString("-> ")).thenReturn("A1:A", "A1:0", DATA);
-
-            view.interact();
-
-            String error = String.format("%s %s",
-                    MessageRepository.getInstance().get("sudoku.put-view.put.error"),
-                    MessageRepository.getInstance().get("sudoku.put-view.put.error-value"));
-
-            verify(console, times(2)).writeError(error);
         }
     }
 

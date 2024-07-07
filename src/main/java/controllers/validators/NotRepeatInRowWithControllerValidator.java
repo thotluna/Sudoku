@@ -20,7 +20,7 @@ public class NotRepeatInRowWithControllerValidator extends InputPutValidator {
         }
 
         Coordinate coordinate = new Coordinate( validatable.split(":")[0]);
-        int value = Integer.parseInt( validatable.split(":")[1]);
+        int value = Integer.parseInt( validatable.substring(3, 4));
 
         Board board = controller.getBoard();
 

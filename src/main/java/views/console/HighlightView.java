@@ -34,7 +34,7 @@ public class HighlightView {
 
         }while (error);
 
-        controller.addCell(data + "h");
+        controller.addCellHighlight(data);
         controller.register();
 
 

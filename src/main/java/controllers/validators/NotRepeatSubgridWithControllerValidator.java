@@ -17,10 +17,9 @@ public class NotRepeatSubgridWithControllerValidator extends InputPutValidator {
             return new Result<>(null, null);
         }
 
-        String[] separate = validatable.split(":");
-        Coordinate coordinate = new Coordinate(separate[0]);
+        Coordinate coordinate = new Coordinate(validatable.substring(0,2));
 
-        int value = Integer.parseInt(separate[1]);
+        int value = Integer.parseInt(validatable.substring(3,4));
 
         Board board = controller.getBoard();
         if(board.hasValueInSubstring(value, coordinate)){

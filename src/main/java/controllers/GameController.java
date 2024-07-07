@@ -76,6 +76,10 @@ public class GameController implements Controller, Ejectable {
 
     }
 
+    public void addCell(Cell cell){
+        session.addCell(cell);
+    }
+
     public Board getSolution() {
         return session.getSolution();
     }
@@ -119,7 +123,7 @@ public class GameController implements Controller, Ejectable {
     }
 
     public void helpCell(String data) {
-        Coordinate coordinate = new Coordinate(data);
+        Coordinate coordinate = new Coordinate(data.substring(0,2));
         session.helpCell(coordinate);
     }
 
@@ -129,5 +133,25 @@ public class GameController implements Controller, Ejectable {
 
     public int getHelpAvailable() {
         return session.getHelpAvailable();
+    }
+
+    public void addCellHighlight(String data) {
+        Coordinate coordinate = new Coordinate(data.substring(0, 2));
+        Cell cell = session.getCell(coordinate);
+        TypeCell type = cell.type() == TypeCell.CANDIDATE
+                ? TypeCell.HIGHLIGHT
+                : TypeCell.CANDIDATE;
+        if(data.contains("/")){
+            int value = Integer.parseInt(data.substring(3, 4));
+            cell = new Cell(cell.coordinate(), value, type);
+        }else{
+            cell = new Cell(cell.coordinate(), cell.value(), type);
+        }
+        addCell(cell);
+    }
+
+    public void deleteCell(String data) {
+        Coordinate coordinate = new Coordinate(data.substring(0, 2));
+        addCell(Cell.nullCell(coordinate));
     }
 }
