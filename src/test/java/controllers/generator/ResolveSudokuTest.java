@@ -3,7 +3,6 @@ package controllers.generator;
 import models.Board;
 import models.Cell;
 import models.Coordinate;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import types.TypeCell;
 
@@ -46,26 +45,6 @@ class ResolveSudokuTest {
                 {6,0,0,1,0,0,9,0,0},
                 {0,0,8,4,0,0,0,0,2},
                 {0,0,0,0,0,0,0,0,0}
-        };
-        board = createBoard(data);
-        resolve = new ResolveSudoku();
-        boolean solved =  resolve.solved(board);
-        assertTrue(solved);
-    }
-
-    @Disabled
-    @Test
-    void GiveBoardProblem_WhenResolveBoardCalled_ThenSolved(){
-        int[][] data = new int[][]{
-                {0, 0, 0, 4, 0, 0, 0, 0, 0},
-                {0, 1, 0, 0, 0, 0, 7, 0, 0},
-                {9, 8, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 7, 0, 0, 0, 8, 0, 0, 0},
-                {5, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 5, 0, 2, 0, 0, 0},
-                {0, 9, 7, 0, 0, 0, 0, 3, 0},
-                {0, 0, 0, 0, 0, 0, 2, 5, 0}
         };
         board = createBoard(data);
         resolve = new ResolveSudoku();
