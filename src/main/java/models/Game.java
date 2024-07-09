@@ -123,4 +123,16 @@ public class Game {
     public boolean isCellBusy(String coordinate) {
         return board.isBusyCell(coordinate);
     }
+
+    public boolean hasValueInColumn(int value, int column) {
+        return board.hasValueInColumn(value, column);
+    }
+
+    public boolean hasValueInRow(int value, int row) {
+        return board.hasValueInRow(value, row);
+    }
+
+    public boolean hasValueInSubstring(int value, Coordinate coordinate) {
+        return board.hasValueInSubstring(value, coordinate);
+    }
 }

@@ -12,7 +12,7 @@ public class Board {
 
     private final int dimension;
 
-    private Cell[][] board;
+    private Cell[][] cells;
 
     public static final int DIMENSION_DEFAULT = 9;
 
@@ -27,12 +27,15 @@ public class Board {
     }
 
     private void createBoard() {
-        board = new Cell[dimension][dimension];
+        cells = new Cell[dimension][dimension];
+
         for (int row = 0; row < dimension; row++) {
             for (int column = 0; column < dimension; column++) {
-                board[row][column] = new Cell(new Coordinate(row, column), 0, TypeCell.CANDIDATE);
+                cells[row][column] = new Cell(new Coordinate(row, column), 0, TypeCell.CANDIDATE);
             }
         }
+
+
     }
 
     public void clear() {
@@ -40,7 +43,7 @@ public class Board {
     }
 
     void forceAdd(Cell cell){
-        board[cell.getRow()][cell.getColumn()] = cell;
+        cells[cell.getRow()][cell.getColumn()] = cell;
     }
 
     public void addCell(Cell cell){
@@ -58,10 +61,9 @@ public class Board {
     public Cell getCell(int row, int column){
         assert new Interval(0, dimension -1).isWithinRange(row);
         assert new Interval(0, dimension -1).isWithinRange(column);
-        return board[row][column];
+        return cells[row][column];
     }
 
-    @SuppressWarnings("unused")
     public Cell getCell(Coordinate coordinate){
         return this.getCell(coordinate.getRow(), coordinate.getColumn());
     }
@@ -69,10 +71,9 @@ public class Board {
     public int getValue(int row, int column){
         assert new Interval(0, dimension -1).isWithinRange(row);
         assert new Interval(0, dimension -1).isWithinRange(column);
-        return board[row][column].value();
+        return cells[row][column].value();
     }
 
-    @SuppressWarnings("unused")
     public int getValue(Coordinate coordinate){
         return this.getValue(coordinate.getRow(), coordinate.getColumn());
     }
@@ -80,7 +81,7 @@ public class Board {
     public boolean isNullCell(int row, int column){
         assert new Interval(0, dimension -1).isWithinRange(row);
         assert new Interval(0, dimension -1).isWithinRange(column);
-        return board[row][column].isEmpty();
+        return cells[row][column].isEmpty();
     }
 
     public boolean isNullCell(Coordinate coordinate){
@@ -91,7 +92,7 @@ public class Board {
     public boolean isBusyCell(int row, int column){
         assert new Interval(0, dimension -1).isWithinRange(row);
         assert new Interval(0, dimension -1).isWithinRange(column);
-        return !this.isNullCell(row, column) && board[row][column].type() == TypeCell.FIXED;
+        return !this.isNullCell(row, column) && cells[row][column].type() == TypeCell.FIXED;
     }
 
     public boolean isBusyCell(Coordinate coordinate){
@@ -106,11 +107,13 @@ public class Board {
         Board newBoard = new Board();
         for (int row = 0; row < dimension; row++) {
             for (int column = 0; column < dimension; column++) {
-                newBoard.addCell(this.board[row][column], true);
+                newBoard.addCell(this.cells[row][column], true);
             }
         }
         return newBoard;
     }
+
+
 
     public boolean isComplete(){
 
@@ -125,12 +128,15 @@ public class Board {
         return true;
     }
 
-    public Cell[][] get(){
-        return board;
+    public List<Cell> verifyClean(Coordinate coordinate, int value) {
+        Cell old = getCell(coordinate);
+        if(old.value() == value) return new ArrayList<>();
+
+        return getCellsError(old.coordinate(), old.value());
     }
 
     public boolean hasValueInRow(int value, int row){
-        Cell[] rowCells = board[row];
+        Cell[] rowCells = cells[row];
         for (int col = 0; col < dimension; col++) {
             if(rowCells[col].value() == value){
                 return true;
@@ -139,13 +145,32 @@ public class Board {
         return false;
     }
 
+    public Cell getCellWithValueInRow(int value, int row) {
+        for (Cell cell : cells[row]) {
+            if(cell.value() == value){
+                return cell;
+            }
+        }
+        return null;
+    }
+
     public boolean hasValueInColumn(int value, int column){
         for (int row = 0; row < dimension; row++) {
-            if(board[row][column].value() == value){
+            if(cells[row][column].value() == value){
                 return true;
             }
         }
         return false;
+    }
+
+    public Cell getCellWithValueInColumn(int value, int column) {
+        for (int row = 0; row < dimension; row++) {
+            Cell cell = cells[row][column];
+            if (cell.value() == value){
+                return cell;
+            }
+        }
+        return null;
     }
 
     public boolean hasValueInSubstring(int value, Coordinate coordinate){
@@ -155,13 +180,78 @@ public class Board {
 
         for (int row = rowSubgrid; row < rowSubgrid + max; row++) {
             for (int column = columnSubgrid; column < columnSubgrid + max; column++) {
-                if(board[row][column].value() == value){
+                if(cells[row][column].value() == value){
                     return true;
                 }
             }
         }
 
         return false;
+    }
+
+    public Cell getCellWithValueInSubgrid(int value, Coordinate coordinate) {
+        int max = (int) (Math.sqrt(dimension));
+        int rowSubgrid = (coordinate.getRow() / max) * max;
+        int columnSubgrid = (coordinate.getColumn() /max) * max;
+
+        for (int row = rowSubgrid; row < rowSubgrid + max; row++) {
+            for (int column = columnSubgrid; column < columnSubgrid + max; column++) {
+                if(cells[row][column].value() == value){
+                    return cells[row][column];
+                }
+            }
+        }
+
+        return null;
+    }
+
+    public List<Cell> getCellsError(Coordinate coordinate, int value) {
+        List<Cell> cellsWithError = new ArrayList<>();
+        if(hasValueInRow(value, coordinate.getRow())){
+            cellsWithError.add(getCellWithValueInRow(value, coordinate.getRow()));
+        }
+        if(hasValueInColumn(value, coordinate.getRow())){
+            cellsWithError.add(getCellWithValueInColumn(value, coordinate.getColumn()));
+        }
+        if(hasValueInSubstring(value, coordinate)){
+            cellsWithError.add( getCellWithValueInSubgrid(value, coordinate));
+        }
+
+        return cellsWithError;
+    }
+
+    public boolean isEmptyComplete() {
+        for (int row = 0; row < dimension; row++) {
+            for (int col = 0; col < dimension; col++) {
+                if(!this.isNullCell(row, col)){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public Cell[][] get(){
+        return cells;
+    }
+
+    public int getDimension() {
+        return dimension;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Board board1 = (Board) o;
+        return dimension == board1.dimension && Arrays.deepEquals(cells, board1.cells);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(dimension);
+        result = 31 * result + Arrays.deepHashCode(cells);
+        return result;
     }
 
     public void print(){
@@ -179,94 +269,6 @@ public class Board {
         }
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Board board1 = (Board) o;
-        return dimension == board1.dimension && Arrays.deepEquals(board, board1.board);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = Objects.hash(dimension);
-        result = 31 * result + Arrays.deepHashCode(board);
-        return result;
-    }
-
-    public boolean isEmptyComplete() {
-        for (int row = 0; row < dimension; row++) {
-            for (int col = 0; col < dimension; col++) {
-                if(!this.isNullCell(row, col)){
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    public int getDimension() {
-        return dimension;
-    }
-
-    public Cell getCellWithValueInRow(int value, int row) {
-        for (Cell cell : board[row]) {
-            if(cell.value() == value){
-                return cell;
-            }
-        }
-        return null;
-    }
-
-    public Cell getCellWithValueInColumn(int value, int column) {
-        for (int row = 0; row < dimension; row++) {
-            Cell cell = board[row][column];
-            if (cell.value() == value){
-                return cell;
-            }
-        }
-        return null;
-    }
-
-    public Cell getCellWithValueInSubgrid(int value, Coordinate coordinate) {
-        int max = (int) (Math.sqrt(dimension));
-        int rowSubgrid = (coordinate.getRow() / max) * max;
-        int columnSubgrid = (coordinate.getColumn() /max) * max;
-
-        for (int row = rowSubgrid; row < rowSubgrid + max; row++) {
-            for (int column = columnSubgrid; column < columnSubgrid + max; column++) {
-                if(board[row][column].value() == value){
-                    return board[row][column];
-                }
-            }
-        }
-
-        return null;
-    }
-
-    public List<Cell> getCellsError(Coordinate coordinate, int value) {
-        List<Cell> cells = new ArrayList<>();
-        if(hasValueInRow(value, coordinate.getRow())){
-            cells.add(getCellWithValueInRow(value, coordinate.getRow()));
-        }
 
 
-        if(hasValueInColumn(value, coordinate.getRow())){
-            cells.add(getCellWithValueInColumn(value, coordinate.getColumn()));
-        }
-        if(hasValueInSubstring(value, coordinate)){
-            cells.add( getCellWithValueInSubgrid(value, coordinate));
-        }
-
-        return cells;
-
-
-    }
-
-    public List<Cell> verifyClean(Coordinate coordinate, int value) {
-        Cell old = getCell(coordinate);
-        if(old.value() == value) return new ArrayList<>();
-
-        return getCellsError(old.coordinate(), old.value());
-    }
 }

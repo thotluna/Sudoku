@@ -149,4 +149,16 @@ public class GameController implements Controller, Ejectable {
         Coordinate coordinate = new Coordinate(data.substring(0, 2));
         addCell(Cell.nullCell(coordinate));
     }
+
+    public boolean hasValueInColumn(int value, int column) {
+        return session.hasValueInColumn(value, column);
+    }
+
+    public boolean hasValueInRow(int value, int row) {
+        return session.hasValueInRow(value, row);
+    }
+
+    public boolean hasValueInSubstring(int value, Coordinate coordinate) {
+        return session.hasValueInSubstring(value, coordinate);
+    }
 }

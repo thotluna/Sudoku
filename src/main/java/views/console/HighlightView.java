@@ -3,6 +3,7 @@ package views.console;
 import controllers.GameController;
 import controllers.validators.DataInputValidator;
 import controllers.validators.DataInputValidatorFactory;
+import controllers.validators.HighlightInputValidator;
 import utils.Console;
 import utils.models.Result;
 
@@ -13,7 +14,7 @@ public class HighlightView {
 
     public HighlightView(GameController controller) {
         this.controller = controller;
-        validator = new DataInputValidatorFactory(controller).getValidator();
+        validator =  new HighlightInputValidator(controller, new DataInputValidatorFactory(controller).getValidator());
     }
 
 

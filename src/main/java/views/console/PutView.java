@@ -3,6 +3,7 @@ package views.console;
 import controllers.GameController;
 import controllers.validators.DataInputValidatorFactory;
 import controllers.validators.DataInputValidator;
+import controllers.validators.PutInputValidator;
 import utils.Console;
 import utils.models.Result;
 
@@ -15,7 +16,7 @@ public class PutView {
 
     public PutView(GameController controller) {
         this.controller = controller;
-        validator = new DataInputValidatorFactory(controller).getValidator();
+        validator = new PutInputValidator(controller, new DataInputValidatorFactory(controller).getValidator());
     }
 
     public void interact(){

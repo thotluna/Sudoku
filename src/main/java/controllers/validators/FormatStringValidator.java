@@ -16,7 +16,7 @@ public class FormatStringValidator extends DataInputValidator {
     protected Result<String, String> specificallyValidate(String validatable) {
 
 
-        String patters = "[A-Ia-i][1-9]|[A-Ia-i][1-9][+.-]|[A-Ia-i][1-9][/:][1-9][+]?";
+        String patters = "[A-Ia-i][1-9][+.-]|[A-Ia-i][1-9][/:][1-9][+]?";
         if(!validatable.matches(patters)){
             return new Result<>(MessageRepository.getInstance().get("sudoku.put-view.put.error"),
                     null);

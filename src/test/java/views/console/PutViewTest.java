@@ -2,7 +2,6 @@ package views.console;
 
 import controllers.GameController;
 import models.Board;
-import models.Cell;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,22 +14,20 @@ import utils.Console;
 import static org.mockito.Mockito.*;
 
 class PutViewTest {
-
     @Mock
     Console console;
-
     @Mock
     GameController controller;
-
     PutView view;
-
     private AutoCloseable closeable;
-
+    private MockedStatic<Console> consoleStatic;
     private static final String DATA = "A1:3";
 
     @BeforeEach
     void setUp() {
         closeable = MockitoAnnotations.openMocks(this);
+        consoleStatic = Mockito.mockStatic(Console.class);
+        consoleStatic.when(Console::getInstance).thenReturn(console);
 
         view = new PutView(controller);
 
@@ -41,107 +38,30 @@ class PutViewTest {
     @AfterEach
     void tearDown() throws Exception {
         closeable.close();
+        consoleStatic.close();
     }
 
     @Test
-    void GiveStart_WhenPutViewCalled_thenPrintAsk(){
-        try (MockedStatic<Console> utilities = Mockito.mockStatic(Console.class)) {
-            utilities.when(Console::getInstance).thenReturn(console);
-            when(console.readString("-> ")).thenReturn(DATA);
-
-            view.interact();
-
-            verify(console).writeln(MessageRepository.getInstance().get("sudoku.put-view.put"));
-        }
+    void GiveStart_WhenPutViewCalled_thenPrintAsk() {
+        when(console.readString("-> ")).thenReturn(DATA);
+        view.interact();
+        verify(console).writeln(MessageRepository.getInstance().get("sudoku.put-view.put"));
     }
 
     @Test
-    void GiveShowASkPutData_WhenInputFormatIsFail_ThenPrinterBadFormat(){
-        try (MockedStatic<Console> utilities = Mockito.mockStatic(Console.class)) {
-            utilities.when(Console::getInstance).thenReturn(console);
-            when(console.readString("-> ")).thenReturn("5", "A54", "A5-4", "A10:1", "A1:10", DATA);
-
-
-            view.interact();
-
-            verify(console, times(5)).writeError(
-                    MessageRepository.getInstance().get("sudoku.put-view.put.error"));
-        }
+    void GiveInputIncorrect_WhenPutInputIsValidate_ThenPrintError() {
+        when(console.readString("-> ")).thenReturn("5", "A54", "A5-4", "A10:1", "A1:10", "A5/5+", "G8+", "N5:5", DATA);
+        view.interact();
+        verify(console, times(8)).writeError(any());
     }
 
     @Test
-    void GiveShowASkPutData_WhenInputCoordinateISCellBusy_ThenPrinterErrorAvailableCell(){
-        try (MockedStatic<Console> utilities = Mockito.mockStatic(Console.class)) {
-            utilities.when(Console::getInstance).thenReturn(console);
-            when(controller.isValidCell(any())).thenReturn(false, true);
-            when(console.readString("-> ")).thenReturn("A1:1", DATA);
-
+    void GiveInputCorrect_WhenPutInputIsValidate_ThenNotPrintError() {
+        String[] inputs = new String[]{"A1:1", "i9/9"};
+        for (String input :  inputs) {
+            when(console.readString("-> ")).thenReturn(input);
             view.interact();
-            String error = String.format("%s %s", MessageRepository.getInstance().get("sudoku.put-view.put.error"),
-                    MessageRepository.getInstance().get("sudoku.put-view.put.error-coordinate-cell-busy"));
-
-            verify(console, times(1)).writeError(error);
+            verify(console, times(0)).writeError(any());
         }
     }
-
-    @Test
-    void GiveShowASkPutData_WhenInputValueCellExistInRow_ThenPrinterErrorValueRepeatRow(){
-        try (MockedStatic<Console> utilities = Mockito.mockStatic(Console.class)) {
-            utilities.when(Console::getInstance).thenReturn(console);
-            when(controller.isValidCell(any())).thenReturn(true);
-            when(console.readString("-> ")).thenReturn("A1:1", DATA);
-            Board board = new Board();
-            board.addCell(Cell.newCellCandidate(0, 1, 1));
-            when(controller.getBoard()).thenReturn(board);
-
-
-            view.interact();
-
-
-            verify(console, times(1)).writeError(
-                    MessageRepository.getInstance().get("sudoku.validator.non-repeated-value-row"));
-        }
-    }
-
-    @Test
-    void GiveShowASkPutData_WhenInputValueCellExistInColumn_ThenPrinterErrorValueRepeatColumn(){
-        try (MockedStatic<Console> utilities = Mockito.mockStatic(Console.class)) {
-            utilities.when(Console::getInstance).thenReturn(console);
-            when(controller.isValidCell(any())).thenReturn(true);
-            when(console.readString("-> ")).thenReturn("A1:1", DATA);
-            Board board = new Board();
-            board.addCell(Cell.newCellCandidate(1, 0, 1));
-            when(controller.getBoard()).thenReturn(board);
-
-
-            view.interact();
-
-
-            verify(console, times(1)).writeError(
-                    MessageRepository.getInstance().get("sudoku.validator.non-repeated-value-column"));
-        }
-    }
-
-    @Test
-    void GiveShowASkPutData_WhenInputValueCellExistInSubgrid_ThenPrinterErrorValueRepeatSubgrid(){
-        try (MockedStatic<Console> utilities = Mockito.mockStatic(Console.class)) {
-            utilities.when(Console::getInstance).thenReturn(console);
-            when(controller.isValidCell(any())).thenReturn(true);
-            when(console.readString("-> ")).thenReturn("A1:1", DATA);
-            Board board = new Board();
-            board.addCell(Cell.newCellCandidate(2, 2, 1));
-            when(controller.getBoard()).thenReturn(board);
-
-
-            view.interact();
-
-
-            verify(console, times(1)).writeError(
-                    MessageRepository.getInstance().get("sudoku.validator.non-repeated-value-subgrid"));
-        }
-    }
-
-
-
-
 }

@@ -120,4 +120,16 @@ public class Session {
     public boolean isCellBusy(String coordinate) {
         return game.isCellBusy(coordinate);
     }
+
+    public boolean hasValueInColumn(int value, int column) {
+        return game.hasValueInColumn(value, column);
+    }
+
+    public boolean hasValueInRow(int value, int row) {
+        return game.hasValueInRow(value, row);
+    }
+
+    public boolean hasValueInSubstring(int value, Coordinate coordinate) {
+        return game.hasValueInSubstring(value, coordinate);
+    }
 }

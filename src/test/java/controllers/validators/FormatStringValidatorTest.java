@@ -32,7 +32,7 @@ class FormatStringValidatorTest {
 
     @Test
     void GiveAInputStringCorrect_WhenValidateFormat_ReturnNoError(){
-        String[] proof = new String[]{"a1", "A1+", "A1.", "A1-", "A1/1", "A1:1", "A1/1+", "I9/9"};
+        String[] proof = new String[]{"A1+", "A1.", "A1-", "A1/1", "A1:1", "A1/1+", "I9/9"};
 
         for (String unit : proof) {
             assertThat(validator.validate(unit).hasError(), is(false));

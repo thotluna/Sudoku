@@ -3,6 +3,7 @@ package views.console;
 import controllers.GameController;
 import controllers.validators.CoordinateInputValidatorFactory;
 import controllers.validators.DataInputValidator;
+import controllers.validators.HelpInputValidator;
 import utils.Console;
 import utils.models.Result;
 
@@ -12,16 +13,15 @@ public class HelpView {
 
     public HelpView(GameController controller) {
         this.controller = controller;
-        validator = new CoordinateInputValidatorFactory(controller).getValidator();
+        validator = new HelpInputValidator(controller, new CoordinateInputValidatorFactory(controller).getValidator());
     }
-
 
     public void interact() {
         boolean error;
         String data;
         do{
             error = false;
-            Console.getInstance().writeln(MessageRepository.getInstance().get("sudoku.highlight-view.highlight"));
+            Console.getInstance().writeln(MessageRepository.getInstance().get("sudoku.help-view.question"));
             data = Console.getInstance().readString("-> ");
 
             Result<String, String> validate = validator.validate(data);
