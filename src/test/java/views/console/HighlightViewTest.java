@@ -6,46 +6,28 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.MockedStatic;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
-import utils.Console;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-class HighlightViewTest {
-
-    @Mock
-    Console console;
-
+class HighlightViewTest extends TestAbstract {
     @Mock
     GameController controller;
-
     HighlightView view;
-
-    private AutoCloseable closeable;
-
-    private MockedStatic<Console> consoleStatic;
 
     private static final String DATA = "A1:3+";
 
     @BeforeEach
     void setUp() {
-        closeable = MockitoAnnotations.openMocks(this);
-        consoleStatic = Mockito.mockStatic(Console.class);
-        consoleStatic.when(Console::getInstance).thenReturn(console);
-
+        this.setUpMock();
         view = new HighlightView(controller);
-
         when(controller.getBoard()).thenReturn(new Board());
         when(controller.isValidCell(any())).thenReturn(true);
     }
 
     @AfterEach
     void tearDown() throws Exception {
-        closeable.close();
-        consoleStatic.close();
+        this.afterTestMock();
     }
 
     @Test

@@ -5,32 +5,29 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import views.console.MessageRepository;
+import views.console.TestAbstract;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
 
-class CancelStartGameCommandTest {
+class CancelStartGameCommandTest extends TestAbstract {
 
     CancelStartGameCommand command;
 
     @Mock
     StartController controller;
 
-    private AutoCloseable closeable;
-
     @BeforeEach
     void setUp() {
-        closeable = MockitoAnnotations.openMocks(this);
+        setUpMock();
         command = new CancelStartGameCommand(MessageRepository.getInstance().get("sudoku.start-menu.cancel"),
                 controller);
     }
 
     @AfterEach
     void tearDown() throws Exception {
-        closeable.close();
-
+        afterTestMock();
     }
 
     @Test

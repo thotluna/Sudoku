@@ -5,31 +5,27 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import views.console.MessageRepository;
+import views.console.TestAbstract;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
 
-class LoadGameCommandTest {
-
+class LoadGameCommandTest extends TestAbstract {
     LoadGameCommand command;
-
     @Mock
     StartController controller;
 
-    private AutoCloseable closeable;
 
     @BeforeEach
     void setUp() {
-        closeable = MockitoAnnotations.openMocks(this);
+        setUpMock();
         command = new LoadGameCommand(MessageRepository.getInstance().get("sudoku.start-menu.load"), controller);
     }
 
     @AfterEach
     void tearDown() throws Exception {
-        closeable.close();
-
+        afterTestMock();
     }
 
     @Test

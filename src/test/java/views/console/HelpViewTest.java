@@ -5,27 +5,14 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.MockedStatic;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
-import utils.Console;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-class HelpViewTest {
-
-    @Mock
-    Console console;
-
+class HelpViewTest extends TestAbstract{
     @Mock
     GameController controller;
-
     HelpView view;
-
-    private AutoCloseable closeable;
-
-    private MockedStatic<Console> consoleStatic;
 
     private final String[] inputsValid = new String[]{"A1.", "i9."};
     private final String[] inputsNotValid = new String[]{"A1:1", "a1:1."};
@@ -36,18 +23,14 @@ class HelpViewTest {
 
     @BeforeEach
     void setUp() {
-        closeable = MockitoAnnotations.openMocks(this);
-        consoleStatic = Mockito.mockStatic(Console.class);
-        consoleStatic.when(Console::getInstance).thenReturn(console);
+        setUpMock();
         when(controller.isValidCell(any())).thenReturn(true);
-
         view = new HelpView(controller);
     }
 
     @AfterEach
     void tearDown() throws Exception {
-        closeable.close();
-        consoleStatic.close();
+        afterTestMock();
     }
 
     @Test
