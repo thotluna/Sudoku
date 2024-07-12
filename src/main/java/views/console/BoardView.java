@@ -48,17 +48,20 @@ public class BoardView {
         StringBuilder cellValue = new StringBuilder();
 
         switch (cell.type()){
-            case FIXED -> cellValue.append(Colors.BLUE.get())
+            case FIXED -> cellValue.append(Colors.BLUE_BACKGROUND.get())
+                    .append(Colors.BLACK.get())
                     .append(" ")
                     .append(cell.value())
                     .append(" ")
                     .append(Colors.DEFAULT.get());
-            case CANDIDATE -> cellValue.append(Colors.DEFAULT.get())
+            case CANDIDATE -> cellValue.append(cell.value() == 0 ? Colors.WHITE_BACKGROUND.get() :
+                Colors.GREEN_BACKGROUND.get() )
+                    .append(Colors.BLACK.get())
                     .append(" ")
-                    .append(cell.value() == 0 ? "-" : cell.value())
+                    .append(cell.value() == 0 ? " " : cell.value())
                     .append(" ")
                     .append(Colors.DEFAULT.get());
-            case HIGHLIGHT -> cellValue.append(Colors.BLUE_BACKGROUND.get())
+            case HIGHLIGHT -> cellValue.append(Colors.YELLOW_BACKGROUND.get())
                     .append(Colors.BLACK.get())
                     .append(" ")
                     .append(cell.value())
